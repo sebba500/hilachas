@@ -1,0 +1,7 @@
+[28-Jan-2024 22:07:31 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[28-Jan-2024 22:07:31 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[28-Jan-2024 22:07:49 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[28-Jan-2024 22:07:49 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/pdo_mysql.so: cannot open shared object file: No such file or directory in Unknown on line 0
+[28-Jan-2024 22:07:58 UTC] PHP Parse error:  syntax error, unexpected ':', expecting '{' in /home/newcertilab/public_html/laravel/vendor/symfony/polyfill-php80/bootstrap.php on line 23
+[05-Jun-2024 20:51:39 UTC] PHP Fatal error:  Array and string offset access syntax with curly braces is no longer supported in /usr/local/lib/php/PEAR/Config.php on line 2095
+[05-Aug-2024 17:12:02 America/Santiago] PHP Fatal error:  Illegal offset type in /home/certilab/public_html/demo/routes/web.php on line 27

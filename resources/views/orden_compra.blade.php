@@ -213,50 +213,15 @@
                         </div>
 
                         <div class="col-sm-12">
-                            <table class="table  table-bordered " style="width:100%; margin-top:50px">
+                            <table class="table table-bordered" style="width:100%; margin-top:50px">
                                 <thead>
                                     <tr>
-
-                                        <th>producto</th>
-                                        <th>cantidad</th>
-
+                                        <th>Producto</th>
+                                        <th>Cantidad</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-
-                                    @if(count($items))
-                                    @foreach ($items as $item)
-                                    <td> {{ $item->nombre }} </td>
-
-                                    @endforeach
-
-
-                                    <td>
-                                        <button type="button" class="btn btn-danger float-right" id="eliminar_producto">
-                                            <span data-feather="trash"></span>
-                                        </button>
-                                    </td>
-                                    @endif
-
-                                    <tr>
-                                        <td> producto 1 </td>
-                                        <td> 1000 </td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger float-right" id="eliminar_producto">
-                                                <span data-feather="trash"></span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td> producto 1.1 </td>
-                                        <td> 1000 </td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger float-right" id="eliminar_producto">
-                                                <span data-feather="trash"></span>
-                                            </button>
-                                        </td>
-                                    </tr>
-
+                                <tbody id="lista-items">
 
                                 </tbody>
                             </table>
@@ -339,7 +304,63 @@
         $("#nav-ordenes_compra").addClass("active");
 
 
+        let items = [];
 
+        // Manejar la adición de ítems al array local
+        $('#agregar_producto').on('click', function() {
+            let id_producto = $('#producto').val();
+            let nombre_producto = $('#producto').text();
+            let cantidad = $('#cantidad').val();
+
+            // Añadir el ítem al array
+            items.push({
+                id_producto: id_producto,
+                nombre_producto : nombre_producto,
+                cantidad: cantidad
+            });
+
+            // Añadir el ítem a la tabla
+            $('#lista-items').append(
+                `<tr>
+                    <td>${nombre_producto}</td>
+                    <td>${cantidad}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger eliminar-item">Eliminar</button>
+                    </td>
+                </tr>`
+            );
+
+
+        });
+
+        $(document).on('click', '.eliminar-item', function() {
+            let row = $(this).closest('tr');
+            let index = row.index();
+
+            // Eliminar el ítem del array
+            items.splice(index, 1);
+
+            // Eliminar la fila de la tabla
+            row.remove();
+        });
+
+        // Enviar el array completo al servidor
+        /*  $('#guardar-items').on('click', function() {
+             $.ajax({
+                 url: '/guardar-items',
+                 method: 'POST',
+                 data: {
+                     _token: '{{ csrf_token() }}',
+                     items: items
+                 },
+                 success: function(response) {
+                     alert('Ítems guardados correctamente');
+                 },
+                 error: function(xhr, status, error) {
+                     console.error('Error en la solicitud AJAX:', error);
+                 }
+             });
+         }); */
 
 
 
@@ -579,7 +600,7 @@
             var data = {
                 id_proveedor: $('#id_proveedor_enviar').val()
             };
-           
+
             $.ajax({
                 data: JSON.stringify(data),
                 url: "{{URL::to('enviarOrden')}}",

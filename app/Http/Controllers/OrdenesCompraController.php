@@ -90,15 +90,17 @@ class OrdenesCompraController extends Controller
         }
     } */
 
-    public function agregarProducto(Request $request)
+    
+    public function guardarOrden(Request $request)
     {
+        $items = $request->input('items');
 
+        // Aquí puedes procesar el array de ítems, guardarlos en la base de datos, etc.
+        foreach ($items as $item) {
+            // Procesar cada ítem (ejemplo: guardarlo en la base de datos)
+        }
 
-
-
-
-
-        return response()->json(['success' => 'guardado.']);
+        return response()->json(['message' => 'Ítems guardados correctamente']);
     }
 
     public function orden_compraQR(Request $request)

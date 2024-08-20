@@ -14,7 +14,6 @@ class OrdenCompra extends Model
         'cotizacion',
         'forma_pago',
         'estado',
-        'fecha_creacion',
         'id_proveedor',
     
     ];

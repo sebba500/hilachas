@@ -68,13 +68,14 @@ Route::get('/orden_compra/{id}', function ($id) {
 
 Route::get('/orden_compraVer/{id}', [OrdenesCompraController::class, 'orden_compraQR'])->name('orden_compraQR');
 Route::post('/enviarOrden', [OrdenesCompraController::class, 'enviarOrden'])->name('ordenesCompra.enviarOrden');
-
+Route::post('/guardarOrden', [OrdenesCompraController::class, 'guardarOrden'])->name('ordenesCompra.guardarOrden');
 
 Route::get('/getDatosProveedor', [ProveedoresController::class, 'getDatosProveedor'])->name('getDatosProveedor');
 
 
 Route::get('/getDatosProducto/{id}', [ProductosController::class, 'getDatosProducto'])->name('getDatosProducto');
-Route::post('/guardar-items', 'OrdenCompraController@guardarItems')->middleware('auth');
+
+
 
 Route::post('/storeUser', [ConfigController::class, 'storeUser'])->name('config.storeUser');
 Route::post('/storePass', [ConfigController::class, 'storePass'])->name('config.storePass');

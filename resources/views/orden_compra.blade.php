@@ -234,7 +234,7 @@
 
 
                     <div class="col-sm-offset-2 col-sm-12">
-                        <button type="submit" class="btn btn-primary float-right" id="saveBtn" value="create">Guardar
+                        <button type="button" class="btn btn-primary float-right" id="saveBtn" value="create">Guardar
                         </button>
                     </div>
                 </form>
@@ -301,25 +301,33 @@
 <script type="text/javascript">
     $(function() {
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        alertify.set('notifier', 'position', 'bottom-center');
+
         $("#nav-ordenes_compra").addClass("active");
 
 
         let items = [];
 
-        // Manejar la adición de ítems al array local
+        
         $('#agregar_producto').on('click', function() {
             let id_producto = $('#producto').val();
             let nombre_producto = $('#producto').text();
             let cantidad = $('#cantidad').val();
 
-            // Añadir el ítem al array
+            // añadir el ítem al array
             items.push({
                 id_producto: id_producto,
-                nombre_producto : nombre_producto,
+                nombre_producto: nombre_producto,
                 cantidad: cantidad
             });
 
-            // Añadir el ítem a la tabla
+            // añadir el ítem a la tabla
             $('#lista-items').append(
                 `<tr>
                     <td>${nombre_producto}</td>
@@ -337,30 +345,44 @@
             let row = $(this).closest('tr');
             let index = row.index();
 
-            // Eliminar el ítem del array
+            // eliminar el ítem del array
             items.splice(index, 1);
 
-            // Eliminar la fila de la tabla
+            // eliminar la fila de la tabla
             row.remove();
         });
 
-        // Enviar el array completo al servidor
-        /*  $('#guardar-items').on('click', function() {
-             $.ajax({
-                 url: '/guardar-items',
-                 method: 'POST',
-                 data: {
-                     _token: '{{ csrf_token() }}',
-                     items: items
-                 },
-                 success: function(response) {
-                     alert('Ítems guardados correctamente');
-                 },
-                 error: function(xhr, status, error) {
-                     console.error('Error en la solicitud AJAX:', error);
-                 }
-             });
-         }); */
+        //guardar orden de compra con los productos
+        $('#saveBtn').on('click', function() {
+
+            let numero_orden = $('#numero').val();
+            let cotizacion = $('#cotizacion').val();
+            let forma_pago = $('#forma_pago').val();
+            let proveedor = $('#proveedor').val();
+
+            if (!numero_orden || !cotizacion || !forma_pago || !proveedor) {
+                alertify.error('Llene todos los campos para guardar');
+                return; 
+            }
+
+            $.ajax({
+                url: "{{URL::to('guardarOrden')}}",
+                method: 'POST',
+                data: {
+                    items: items,
+                    numero_orden,
+                    cotizacion,
+                    forma_pago,
+                    proveedor
+                },
+                success: function(response) {
+                    alert('Ítems guardados correctamente');
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error en la solicitud AJAX:', error);
+                }
+            });
+        });
 
 
 
@@ -415,11 +437,7 @@
         ]
 
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+
 
 
         var table = $('.data-table').DataTable({
@@ -480,7 +498,8 @@
 
 
 
-
+                    items = [];
+                    $('#lista-items').empty();
 
                 }
             })
@@ -549,37 +568,7 @@
 
 
 
-        $('#agregar_producto').click(function(e) {
-            /* e.preventDefault();
-            $(this).html('Guardando...');
 
-            var data = new FormData($('#orden_compraForm')[0]);
-            $.ajax({
-                data: data,
-                url: "{{URL::to('agregarProducto')}}",
-                type: "POST",
-
-                contentType: false,
-                processData: false,
-                success: function(data) {
-
-                    $('#orden_compraForm').trigger("reset");
-                    $('#ajaxModel').modal('hide');
-                    table.draw();
-
-                    $('#saveBtn').html('Guardar');
-
-
-
-
-                },
-                error: function(data) {
-                    console.log('Error:', data);
-                    $('#saveBtn').html('Error');
-
-                }
-            }); */
-        });
 
         $('body').on('click', '.enviarOrdenCompra', function() {
 
@@ -630,84 +619,84 @@
 
 
 
-        $('body').on('click', '.editOrdenCompra', function() {
+        /*  $('body').on('click', '.editOrdenCompra', function() {
 
-            var orden_compra_id = $(this).data('id');
+             var orden_compra_id = $(this).data('id');
 
-            $("#boton-editar" + orden_compra_id).prop("disabled", true);
-            $("#boton-editar" + orden_compra_id).html(`<i class="fa fa-circle-o-notch fa-spin" style="font-size:17px"></i><span style="font-size:13px;margin-left:5px">Editar</span>`);
-
-
-            $.get("{{ route('ordenes_compra.index') }}" + '/' + orden_compra_id + '/edit', function(data) {
-                $('#modelHeading').html("Editar orden_compra");
-                $('#saveBtn').val("edit-orden_compra");
+             $("#boton-editar" + orden_compra_id).prop("disabled", true);
+             $("#boton-editar" + orden_compra_id).html(`<i class="fa fa-circle-o-notch fa-spin" style="font-size:17px"></i><span style="font-size:13px;margin-left:5px">Editar</span>`);
 
 
-                $('#orden_compra_id').val(data.id);
-                $('#rut').val(data.rut);
-                $('#nombre').val(data.nombre);
-                $('#fecha_nacimiento').val(data.fecha_nacimiento);
-                $('#genero').val(data.genero);
-                $('#domicilio').val(data.domicilio);
-                $('#ciudad').val(data.ciudad);
-                $('#celular').val(data.celular);
-                $('#cargo').val(data.cargo);
-                $('#grupo_sangre').val(data.grupo_sangre);
-                $('#peso').val(data.peso);
-                $('#estatura').val(data.estatura);
-                $('#enfermedad_base').val(data.enfermedad_base);
-                $('#alergia').val(data.alergia);
-                $('#medicamento_prescrito').val(data.medicamento_prescrito);
-                $('#rut_empresa').val(data.rut_empresa);
-                $('#nombre_empresa').val(data.nombre_empresa);
-                $('#direccion_empresa').val(data.direccion_empresa);
-                $('#ciudad_empresa').val(data.ciudad_empresa);
-                $('#contacto_emergencia').val(data.contacto_emergencia);
-                $('#cargo_contacto').val(data.cargo_contacto);
-                $('#fono_emergencia').val(data.fono_emergencia);
-                $('#observacion').val(data.observacion);
-                //$('#foto').val(data.foto);
-
-                if (data.foto) {
-
-                    $("#label_foto").text("FOTO CARGADA");
-                    $("#label_foto").css("color", "green");
-                } else {
-                    $("#label_foto").text("FOTO SIN CARGAR");
-                    $("#label_foto").css("color", "red");
-                }
-
-                $.ajax({
-                    url: "{{URL::to('getDatosEmpresa')}}",
-                    type: 'GET',
-                    success: function(data1) {
-
-                        $("#boton-editar" + orden_compra_id).prop("disabled", false);
-                        $("#boton-editar" + orden_compra_id).html(`Editar`);
-
-                        $('#ajaxModel').modal('show');
-                        var sel = $("#mutualidad");
-                        sel.empty();
-                        for (var i = 0; i < data1.length; i++) {
+             $.get("{{ route('ordenes_compra.index') }}" + '/' + orden_compra_id + '/edit', function(data) {
+                 $('#modelHeading').html("Editar orden_compra");
+                 $('#saveBtn').val("edit-orden_compra");
 
 
-                            sel.append('<option value="' + data1[i].id + '">' + data1[i].nombre + '</option>');
+                 $('#orden_compra_id').val(data.id);
+                 $('#rut').val(data.rut);
+                 $('#nombre').val(data.nombre);
+                 $('#fecha_nacimiento').val(data.fecha_nacimiento);
+                 $('#genero').val(data.genero);
+                 $('#domicilio').val(data.domicilio);
+                 $('#ciudad').val(data.ciudad);
+                 $('#celular').val(data.celular);
+                 $('#cargo').val(data.cargo);
+                 $('#grupo_sangre').val(data.grupo_sangre);
+                 $('#peso').val(data.peso);
+                 $('#estatura').val(data.estatura);
+                 $('#enfermedad_base').val(data.enfermedad_base);
+                 $('#alergia').val(data.alergia);
+                 $('#medicamento_prescrito').val(data.medicamento_prescrito);
+                 $('#rut_empresa').val(data.rut_empresa);
+                 $('#nombre_empresa').val(data.nombre_empresa);
+                 $('#direccion_empresa').val(data.direccion_empresa);
+                 $('#ciudad_empresa').val(data.ciudad_empresa);
+                 $('#contacto_emergencia').val(data.contacto_emergencia);
+                 $('#cargo_contacto').val(data.cargo_contacto);
+                 $('#fono_emergencia').val(data.fono_emergencia);
+                 $('#observacion').val(data.observacion);
+                 //$('#foto').val(data.foto);
 
-                            if (data.mutualidad == data1[i].id) {
+                 if (data.foto) {
+
+                     $("#label_foto").text("FOTO CARGADA");
+                     $("#label_foto").css("color", "green");
+                 } else {
+                     $("#label_foto").text("FOTO SIN CARGAR");
+                     $("#label_foto").css("color", "red");
+                 }
+
+                 $.ajax({
+                     url: "{{URL::to('getDatosEmpresa')}}",
+                     type: 'GET',
+                     success: function(data1) {
+
+                         $("#boton-editar" + orden_compra_id).prop("disabled", false);
+                         $("#boton-editar" + orden_compra_id).html(`Editar`);
+
+                         $('#ajaxModel').modal('show');
+                         var sel = $("#mutualidad");
+                         sel.empty();
+                         for (var i = 0; i < data1.length; i++) {
 
 
-                                sel.val(data1[i].id);
-                            }
-                        }
+                             sel.append('<option value="' + data1[i].id + '">' + data1[i].nombre + '</option>');
 
-                        //console.log(data.mutualidad);
+                             if (data.mutualidad == data1[i].id) {
 
-                    }
-                })
 
-            })
-        });
-        $('#saveBtn').click(function(e) {
+                                 sel.val(data1[i].id);
+                             }
+                         }
+
+                         //console.log(data.mutualidad);
+
+                     }
+                 })
+
+             })
+         }); */
+        /* $('#saveBtn').click(function(e) {
             e.preventDefault();
             $(this).html('Guardando...');
 
@@ -737,7 +726,7 @@
 
                 }
             });
-        });
+        }); */
 
 
 

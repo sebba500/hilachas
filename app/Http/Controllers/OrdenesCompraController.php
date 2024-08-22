@@ -17,8 +17,10 @@ use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Laravel\Facades\Image;
 
 use App\Mail\OrdenMailable;
+use App\Models\Producto;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+
 class OrdenesCompraController extends Controller
 {
 
@@ -90,15 +92,36 @@ class OrdenesCompraController extends Controller
         }
     } */
 
-    public function agregarProducto(Request $request)
+
+    public function guardarOrden(Request $request)
     {
+        $items = $request->input('items');
+
+
+    
+
+        $orden_compra =  OrdenCompra::create([
+            'numero' => $request->numero_orden,
+            'cotizacion' => $request->cotizacion,
+            'forma_pago' => $request->forma_pago,
+            'id_proveedor' => $request->proveedor,
+            'estado' => "10",
+        
+        ]); 
+
+
+        foreach ($items as $item) {
+             OrdenCompraProducto::create([
+                'id_orden' => $orden_compra->id,
+                'id_producto' => $item['id_producto'],
+                'cantidad' => $item['cantidad'],
+            ]); 
+        }
 
 
 
 
-
-
-        return response()->json(['success' => 'guardado.']);
+        return response()->json(['message' => "Orden de compra creada"]);
     }
 
     public function orden_compraQR(Request $request)
@@ -128,37 +151,34 @@ class OrdenesCompraController extends Controller
     {
 
 
- 
 
-            $id_proveedor = $request->input('id_proveedor');
-            $proveedor = Proveedor::find($id_proveedor);
 
-        
-         
+        $id_proveedor = $request->input('id_proveedor');
+        $proveedor = Proveedor::find($id_proveedor);
 
-           
-            try {
-                Mail::to($proveedor->email)->send(new OrdenMailable($proveedor->nombre,storage_path("app/public/orden_compra_1.pdf")));
-        
-                // Verifica si hay errores en la cola de correo
-                if (count(Mail::failures()) > 0) {
-                    // Si hay errores, registra los detalles y devuelve una respuesta de error
-                    Log::error('Error al enviar correo: ' . implode(', ', Mail::failures()));
-                    return response()->json(['success' => false, 'message' => 'Error al enviar correo', 'errors' => Mail::failures()]);
-                }
-        
-                // Si no hay errores, devuelve una respuesta de éxito
-                return response()->json(['success' => true, 'message' => 'Correo enviado con éxito', 'email' => $proveedor->email]);
-        
-            } catch (\Exception $e) {
-                // Registra el error en el log
-                Log::error('Error al enviar correo: ' . $e->getMessage());
-        
-                // Devuelve una respuesta de error
-                return response()->json(['success' => false, 'message' => 'Error al enviar correo', 'error' => $e->getMessage()]);
+
+
+
+
+        try {
+            Mail::to($proveedor->email)->send(new OrdenMailable($proveedor->nombre, storage_path("app/public/orden_compra_1.pdf")));
+
+            // Verifica si hay errores en la cola de correo
+            if (count(Mail::failures()) > 0) {
+                // Si hay errores, registra los detalles y devuelve una respuesta de error
+                Log::error('Error al enviar correo: ' . implode(', ', Mail::failures()));
+                return response()->json(['success' => false, 'message' => 'Error al enviar correo', 'errors' => Mail::failures()]);
             }
 
-       
+            // Si no hay errores, devuelve una respuesta de éxito
+            return response()->json(['success' => true, 'message' => 'Correo enviado con éxito', 'email' => $proveedor->email]);
+        } catch (\Exception $e) {
+            // Registra el error en el log
+            Log::error('Error al enviar correo: ' . $e->getMessage());
+
+            // Devuelve una respuesta de error
+            return response()->json(['success' => false, 'message' => 'Error al enviar correo', 'error' => $e->getMessage()]);
+        }
     }
 
 
@@ -192,13 +212,31 @@ class OrdenesCompraController extends Controller
             OrdenCompra::updateOrCreate(
                 ['id' => $request->orden_compra_id],
                 [
-                    'rut' => $request->rut, 'nombre' => $request->nombre, 'fecha_nacimiento' => $request->fecha_nacimiento,
-                    'genero' => $request->genero, 'mutualidad' => $request->mutualidad, 'domicilio' => $request->domicilio, 'ciudad' => $request->ciudad,
-                    'celular' => $request->celular, 'cargo' => $request->cargo, 'grupo_sangre' => $request->grupo_sangre, 'peso' => $request->peso,
-                    'estatura' => $request->estatura, 'enfermedad_base' => $request->enfermedad_base, 'alergia' => $request->alergia, 'medicamento_prescrito' => $request->medicamento_prescrito,
-                    'rut_empresa' => $request->rut_empresa, 'nombre_empresa' => $request->nombre_empresa, 'direccion_empresa' => $request->direccion_empresa, 'ciudad_empresa' => $request->ciudad_empresa,
-                    'contacto_emergencia' => $request->contacto_emergencia, 'cargo_contacto' => $request->cargo_contacto, 'fono_emergencia' => $request->fono_emergencia, 'observacion' => $request->observacion,
-                    'foto' => $archivo->getClientOriginalName(), 'id_usuario' => $id_usuario
+                    'rut' => $request->rut,
+                    'nombre' => $request->nombre,
+                    'fecha_nacimiento' => $request->fecha_nacimiento,
+                    'genero' => $request->genero,
+                    'mutualidad' => $request->mutualidad,
+                    'domicilio' => $request->domicilio,
+                    'ciudad' => $request->ciudad,
+                    'celular' => $request->celular,
+                    'cargo' => $request->cargo,
+                    'grupo_sangre' => $request->grupo_sangre,
+                    'peso' => $request->peso,
+                    'estatura' => $request->estatura,
+                    'enfermedad_base' => $request->enfermedad_base,
+                    'alergia' => $request->alergia,
+                    'medicamento_prescrito' => $request->medicamento_prescrito,
+                    'rut_empresa' => $request->rut_empresa,
+                    'nombre_empresa' => $request->nombre_empresa,
+                    'direccion_empresa' => $request->direccion_empresa,
+                    'ciudad_empresa' => $request->ciudad_empresa,
+                    'contacto_emergencia' => $request->contacto_emergencia,
+                    'cargo_contacto' => $request->cargo_contacto,
+                    'fono_emergencia' => $request->fono_emergencia,
+                    'observacion' => $request->observacion,
+                    'foto' => $archivo->getClientOriginalName(),
+                    'id_usuario' => $id_usuario
                 ]
             );
 
@@ -235,12 +273,29 @@ class OrdenesCompraController extends Controller
             OrdenCompra::updateOrCreate(
                 ['id' => $request->orden_compra_id],
                 [
-                    'rut' => $request->rut, 'nombre' => $request->nombre, 'fecha_nacimiento' => $request->fecha_nacimiento,
-                    'genero' => $request->genero, 'mutualidad' => $request->mutualidad, 'domicilio' => $request->domicilio, 'ciudad' => $request->ciudad,
-                    'celular' => $request->celular, 'cargo' => $request->cargo, 'grupo_sangre' => $request->grupo_sangre, 'peso' => $request->peso,
-                    'estatura' => $request->estatura, 'enfermedad_base' => $request->enfermedad_base, 'alergia' => $request->alergia, 'medicamento_prescrito' => $request->medicamento_prescrito,
-                    'rut_empresa' => $request->rut_empresa, 'nombre_empresa' => $request->nombre_empresa, 'direccion_empresa' => $request->direccion_empresa, 'ciudad_empresa' => $request->ciudad_empresa,
-                    'contacto_emergencia' => $request->contacto_emergencia, 'cargo_contacto' => $request->cargo_contacto, 'fono_emergencia' => $request->fono_emergencia, 'observacion' => $request->observacion,
+                    'rut' => $request->rut,
+                    'nombre' => $request->nombre,
+                    'fecha_nacimiento' => $request->fecha_nacimiento,
+                    'genero' => $request->genero,
+                    'mutualidad' => $request->mutualidad,
+                    'domicilio' => $request->domicilio,
+                    'ciudad' => $request->ciudad,
+                    'celular' => $request->celular,
+                    'cargo' => $request->cargo,
+                    'grupo_sangre' => $request->grupo_sangre,
+                    'peso' => $request->peso,
+                    'estatura' => $request->estatura,
+                    'enfermedad_base' => $request->enfermedad_base,
+                    'alergia' => $request->alergia,
+                    'medicamento_prescrito' => $request->medicamento_prescrito,
+                    'rut_empresa' => $request->rut_empresa,
+                    'nombre_empresa' => $request->nombre_empresa,
+                    'direccion_empresa' => $request->direccion_empresa,
+                    'ciudad_empresa' => $request->ciudad_empresa,
+                    'contacto_emergencia' => $request->contacto_emergencia,
+                    'cargo_contacto' => $request->cargo_contacto,
+                    'fono_emergencia' => $request->fono_emergencia,
+                    'observacion' => $request->observacion,
                     'id_usuario' => $id_usuario
                 ]
             );

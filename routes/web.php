@@ -23,15 +23,17 @@ Route::get('/', function () {
 
 Route::get('/ListaOrdenesCompra', function () {
 
-    $items = array();
-    $data[0]['nombre'] = 'producto 1';
-    $data[0]['precio'] = '1000';
+    /* $items = array();
+    $items[0]['nombre'] = 'producto 1';
+    $items[0]['precio'] = '1000';
 
-    $data[1]['nombre'] = 'producto 2';
-    $data[1]['precio'] = '2000';
+    $items[1]['nombre'] = 'producto 2';
+    $items[1]['precio'] = '2000'; */
 
 
-    return view('orden_compra')->with('items', $items);
+    /* return view('orden_compra')->with('items', $items); */
+
+    return view('orden_compra');
 })->middleware('auth');
 
 Route::get('/ListaProductos', function () {
@@ -66,16 +68,18 @@ Route::get('/orden_compra/{id}', function ($id) {
 
 Route::get('/orden_compraVer/{id}', [OrdenesCompraController::class, 'orden_compraQR'])->name('orden_compraQR');
 Route::post('/enviarOrden', [OrdenesCompraController::class, 'enviarOrden'])->name('ordenesCompra.enviarOrden');
-
+Route::post('/guardarOrden', [OrdenesCompraController::class, 'guardarOrden'])->name('ordenesCompra.guardarOrden');
 
 Route::get('/getDatosProveedor', [ProveedoresController::class, 'getDatosProveedor'])->name('getDatosProveedor');
 
 
 Route::get('/getDatosProducto/{id}', [ProductosController::class, 'getDatosProducto'])->name('getDatosProducto');
-Route::post('/agregarProducto', [ProductosController::class, 'agregarProducto'])->name('productos.agregarProducto');
+
+
 
 Route::post('/storeUser', [ConfigController::class, 'storeUser'])->name('config.storeUser');
 Route::post('/storePass', [ConfigController::class, 'storePass'])->name('config.storePass');
+
 
 
 

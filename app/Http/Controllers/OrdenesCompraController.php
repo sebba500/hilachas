@@ -19,7 +19,7 @@ use Intervention\Image\Laravel\Facades\Image;
 use App\Mail\OrdenMailable;
 use App\Models\Producto;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Log;
+use Log;
 
 class OrdenesCompraController extends Controller
 {
@@ -34,12 +34,35 @@ class OrdenesCompraController extends Controller
 
 
             $data = \DB::table('ordenes_compra')
-                ->leftjoin('proveedores', 'proveedores.id', '=', 'ordenes_compra.id_proveedor')
-                ->select('ordenes_compra.id', 'ordenes_compra.numero', 'ordenes_compra.cotizacion', 'ordenes_compra.forma_pago', 'ordenes_compra.estado', 'ordenes_compra.fecha_creacion', 'ordenes_compra.monto_orden', 'proveedores.nombre as nombre_proveedor', 'proveedores.id as id_proveedor')
+                ->leftJoin('proveedores', 'proveedores.id', '=', 'ordenes_compra.id_proveedor')
+                ->leftJoin('ordenes_compra_productos', 'ordenes_compra_productos.id_orden', '=', 'ordenes_compra.id')
+                ->leftJoin('productos', 'productos.id', '=', 'ordenes_compra_productos.id_producto')
+                ->select(
+                    'ordenes_compra.id',
+                    'ordenes_compra.numero',
+                    'ordenes_compra.cotizacion',
+                    'ordenes_compra.forma_pago',
+                    'ordenes_compra.estado',
+                    'ordenes_compra.created_at as fecha_creacion',
+                    'proveedores.nombre as nombre_proveedor',
+                    'proveedores.id as id_proveedor',
+                    \DB::raw('SUM(ordenes_compra_productos.cantidad * productos.precio) as monto_orden') // Supuesto de cálculo del monto total
+                )
+                ->groupBy(
+                    'ordenes_compra.id',
+                    'ordenes_compra.numero',
+                    'ordenes_compra.cotizacion',
+                    'ordenes_compra.forma_pago',
+                    'ordenes_compra.estado',
+                    'ordenes_compra.created_at',
+                    'proveedores.id',
+                    'proveedores.nombre'
+                )
                 ->get();
 
             $data->transform(function ($item) {
                 $item->fecha_creacion = Carbon::parse($item->fecha_creacion)->format('d/m/Y H:i'); // Formato de la fecha
+
                 return $item;
             });
 
@@ -53,7 +76,7 @@ class OrdenesCompraController extends Controller
                     $btn = "";
 
                     if ($row->estado == 0) {
-                        $btn = $btn . '<a style="color:black; margin-right:5px;margin-top:5px;margin-bottom:5px" href="javascript:void(0)" data-toggle="tooltip"  data-id_proveedor="' . $row->id_proveedor . '"  data-original-title="Enviar" class="btn btn-warning btn-sm enviarOrdenCompra">Enviar &nbsp;<i class="icon-envelope-letter ">&nbsp;</i></a>';
+                        $btn = $btn . '<a style="color:black; margin-right:5px;margin-top:5px;margin-bottom:5px" href="javascript:void(0)" data-toggle="tooltip"  data-id_proveedor="' . $row->id_proveedor . '" data-id_orden="' . $row->id . '"  data-original-title="Enviar" class="btn btn-warning btn-sm enviarOrdenCompra">Enviar &nbsp;<i class="icon-envelope-letter ">&nbsp;</i></a>';
                     }
                     $btn = $btn . '<a style="color:black; margin-right:5px; margin-top:5px;margin-bottom:5px" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '"  data-original-title="VerQR" class="btn btn-success btn-sm verOrdenCompra">Ver &nbsp;<i class="icon-doc ">&nbsp;</i></a>';
 
@@ -98,24 +121,24 @@ class OrdenesCompraController extends Controller
         $items = $request->input('items');
 
 
-    
+
 
         $orden_compra =  OrdenCompra::create([
             'numero' => $request->numero_orden,
             'cotizacion' => $request->cotizacion,
             'forma_pago' => $request->forma_pago,
             'id_proveedor' => $request->proveedor,
-            'estado' => "10",
-        
-        ]); 
+            'estado' => "0",
+
+        ]);
 
 
         foreach ($items as $item) {
-             OrdenCompraProducto::create([
+            OrdenCompraProducto::create([
                 'id_orden' => $orden_compra->id,
                 'id_producto' => $item['id_producto'],
                 'cantidad' => $item['cantidad'],
-            ]); 
+            ]);
         }
 
 
@@ -160,19 +183,30 @@ class OrdenesCompraController extends Controller
 
 
 
+
+
         try {
             Mail::to($proveedor->email)->send(new OrdenMailable($proveedor->nombre, storage_path("app/public/orden_compra_1.pdf")));
 
             // Verifica si hay errores en la cola de correo
             if (count(Mail::failures()) > 0) {
+
                 // Si hay errores, registra los detalles y devuelve una respuesta de error
                 Log::error('Error al enviar correo: ' . implode(', ', Mail::failures()));
                 return response()->json(['success' => false, 'message' => 'Error al enviar correo', 'errors' => Mail::failures()]);
             }
 
-            // Si no hay errores, devuelve una respuesta de éxito
+      
+            $orden_compra = OrdenCompra::find($request->id_orden);
+            $orden_compra->update([
+                'estado' => "10",
+            ]);
+
+
+
             return response()->json(['success' => true, 'message' => 'Correo enviado con éxito', 'email' => $proveedor->email]);
         } catch (\Exception $e) {
+
             // Registra el error en el log
             Log::error('Error al enviar correo: ' . $e->getMessage());
 

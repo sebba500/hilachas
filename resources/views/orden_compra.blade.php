@@ -268,7 +268,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="enviarModal" aria-hidden="true">
+<div class="modal fade" id="enviarModal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 
 
     <div class="modal-dialog modal-dialog-centered">
@@ -283,6 +283,7 @@
 
                 <p>¿Enviar la orden al proveedor?</p>
                 <input type="hidden" name="id_proveedor_enviar" id="id_proveedor_enviar">
+                <input type="hidden" name="id_orden_enviar" id="id_orden_enviar">
 
                 <button type="submit" class="btn btn-primary float-right" id="enviar_boton">Enviar
                 </button>
@@ -314,10 +315,10 @@
 
         let items = [];
 
-        
+
         $('#agregar_producto').on('click', function() {
             let id_producto = $('#producto').val();
-            let nombre_producto = $('#producto').text();
+            let nombre_producto = $('#producto option:selected').text();
             let cantidad = $('#cantidad').val();
 
             // añadir el ítem al array
@@ -362,7 +363,7 @@
 
             if (!numero_orden || !cotizacion || !forma_pago || !proveedor) {
                 alertify.error('Llene todos los campos para guardar');
-                return; 
+                return;
             }
 
             $.ajax({
@@ -376,7 +377,9 @@
                     proveedor
                 },
                 success: function(response) {
-                    alert('Ítems guardados correctamente');
+                    $('#ajaxModel').modal('hide');
+                    table.draw();
+
                 },
                 error: function(xhr, status, error) {
                     console.error('Error en la solicitud AJAX:', error);
@@ -576,9 +579,11 @@
             $('#enviarModal').modal('show');
 
             var id_proveedor = $(this).data("id_proveedor");
+            var id_orden = $(this).data("id_orden");
 
 
             $('#id_proveedor_enviar').val(id_proveedor);
+            $('#id_orden_enviar').val(id_orden);
 
 
         });
@@ -586,8 +591,12 @@
         $('#enviar_boton').click(function(e) {
             e.preventDefault();
 
+            $("#enviar_boton").prop("disabled", true);
+            $("#enviar_boton").html(`<i class="fa fa-circle-o-notch fa-spin" style="font-size:18px" ></i><span style="font-size:16px;margin-left:5px">Enviando</span>`);
+
             var data = {
-                id_proveedor: $('#id_proveedor_enviar').val()
+                id_proveedor: $('#id_proveedor_enviar').val(),
+                id_orden: $('#id_orden_enviar').val()
             };
 
             $.ajax({
@@ -599,6 +608,8 @@
                 processData: false,
                 success: function(data) {
 
+                    $("#enviar_boton").prop("disabled", false);
+                    $("#enviar_boton").html(`Enviar`);
 
                     $('#enviarModal').modal('hide');
                     table.draw();

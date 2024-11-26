@@ -11,87 +11,14 @@
 
 
 
-<div class="row">
-    <div class="col-xl-3 col-sm-6 col-12">
-        <div class="card">
-            <div class="card-content">
-                <div class="card-body">
-                    <div class="media d-flex">
-                        <div class="align-self-center">
-                            <i class="icon-notebook primary font-large-2 float-left"></i>
-                        </div>
-                        <div class="media-body text-right">
-                            <h3>19</h3>
-                            <span>Ordenes creadas último mes</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-sm-6 col-12">
-        <div class="card">
-            <div class="card-content">
-                <div class="card-body">
-                    <div class="media d-flex">
-                        <div class="align-self-center">
-                            <i class="icon-envelope-letter warning font-large-2 float-left"></i>
-                        </div>
-                        <div class="media-body text-right">
-                            <h3>15</h3>
-                            <span>Ordenes enviadas último mes</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-sm-6 col-12">
-        <div class="card">
-            <div class="card-content">
-                <div class="card-body">
-                    <div class="media d-flex">
-                        <div class="align-self-center">
-                            <i class="lni lni-exit"></i>
-                            <span class="fa fa-money success font-large-2 float-left"></span>
-                            <!--  <i class="fa-money success font-large-2 float-left"></i>  -->
-                        </div>
-                        <div class="media-body text-right">
-                            <h3>$ 154.589</h3>
-                            <span>Valor ordenes enviadas último mes</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-sm-6 col-12">
-        <div class="card">
-            <div class="card-content">
-                <div class="card-body">
-                    <div class="media d-flex">
-                        <div class="align-self-center">
-                            <i class="icon-social-dropbox danger font-large-2 float-left"></i>
-                        </div>
-                        <div class="media-body text-right">
-                            <h3>423</h3>
-                            <span>Productos comprados último mes</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <!-- <a href="{{ url('/ListaProductos') }}" class="btn btn-xs btn-info pull-right">Productos</a> -->
 <div>
     <div class="row" style="margin-top: 10px;margin-left:10px;">
-        <h2>ORDENES DE COMPRA</h2>
+        <h2>PRODUCTOS EN BODEGA </h2>
 
 
-        <a class="btn btn-success" href="javascript:void(0)" id="createNewOrdenCompra" style="height: 40px;margin-left: 10px;margin-top: 10px;">NUEVA ORDEN</a>
+      
 
     </div>
 
@@ -123,7 +50,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="modelHeading">Crear orden de compra</h4>
+                <h4 class="modal-title" id="modelHeading"></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -170,133 +97,6 @@
 
                         </div>
                     </div>
-
-                    <hr>
-
-                    <div style="border: 1px solid;border-radius: 10px;padding: 20px;margin-bottom: 30px;">
-
-                        <div class="row ">
-                            <div class="col-lg-8 ">
-
-                                <label class="col-sm-4 control-label">Producto</label>
-                                <div class="col-sm-12">
-
-                                    <select class="form-control" name="producto" id="producto">
-
-                                    </select>
-
-
-
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-
-                                <label class="col-sm-4 control-label">Cantidad</label>
-                                <div class="col-sm-12">
-                                    <input type="number" id="cantidad" name="cantidad" placeholder="" class="form-control" value="1">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-2">
-
-                                <label class="col-sm-4 control-label">&zwnj;</label>
-                                <div class="col-sm-12">
-
-                                    <button type="button" class="btn btn-success float-right" id="agregar_producto" style="width: 100px;height: 38px;">
-                                        <span data-feather="plus"></span>
-                                    </button>
-
-
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12">
-                            <table class="table table-bordered" style="width:100%; margin-top:50px">
-                                <thead>
-                                    <tr>
-                                        <th>Producto</th>
-                                        <th>Cantidad</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="lista-items">
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-
-
-
-
-
-                    <div class="col-sm-offset-2 col-sm-12">
-                        <button type="button" class="btn btn-primary float-right" id="saveBtn" value="create">Guardar
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="modal fade" id="recepcionarModal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="modelHeading">Recepcionar Orden</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="orden_compraForm" name="orden_compraForm" class="form-horizontal" enctype="multipart/form-data">
-
-                    <input type="hidden" name="orden_compra_id" id="orden_compra_id">
-
-                    <!--
-                    <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">Número</label>
-                        <div class="col-sm-12">
-                            <input type="number" class="form-control" id="numero" name="numero" placeholder="" value="" required="">
-                        </div>
-                    </div>
-
-                  <div class="form-group">
-                        <label class="col-sm-4 control-label">Cotización</label>
-                        <div class="col-sm-12">
-                            <input type="text" id="cotizacion" name="cotizacion" placeholder="" class="form-control" required="">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Forma de Pago</label>
-                        <div class="col-sm-12">
-
-                            <select class="form-control" name="forma_pago" id="forma_pago">
-                                <option value="Contado">Contado</option>
-                                <option value="Crédito">Crédito</option>
-                            </select>
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Proveedor</label>
-                        <div class="col-sm-12">
-
-                            <select class="form-control" name="proveedor" id="proveedor">
-
-                            </select>
-
-
-
-                        </div>
-                    </div> -->
 
                     <hr>
 
@@ -437,7 +237,7 @@
 
         alertify.set('notifier', 'position', 'bottom-center');
 
-        $("#nav-ordenes_compra").addClass("active");
+        $("#nav-inventario").addClass("active");
 
 
         let items = [];
@@ -538,10 +338,6 @@
                         return 'Creada';
                     } else if (data == 10) {
                         return 'Enviada';
-                    } else if (data == 20) {
-                        return 'Recepcion parcial';
-                    } else if (data == 30) {
-                        return 'Recepcionada';
                     } else {
                         return data; // Valor por defecto
                     }
@@ -650,7 +446,7 @@
             $('#saveBtn').val("create-orden_compra");
             $('#orden_compra_id').val('');
             $('#orden_compraForm').trigger("reset");
-
+            $('#modelHeading').html("Crear orden de compra");
             $.ajax({
                 url: "{{URL::to('getDatosProveedor')}}",
                 type: 'GET',
@@ -703,22 +499,6 @@
 
 
 
-
-
-        $('body').on('click', '.recepcionarOrdenCompra', function() {
-
-
-            $('#recepcionarModal').modal('show');
-
-            var id_proveedor = $(this).data("id_proveedor");
-            var id_orden = $(this).data("id_orden");
-
-
-            $('#id_proveedor_enviar').val(id_proveedor);
-            $('#id_orden_enviar').val(id_orden);
-
-
-        });
 
         $('body').on('click', '.enviarOrdenCompra', function() {
 
@@ -777,6 +557,114 @@
 
 
 
+        /*  $('body').on('click', '.editOrdenCompra', function() {
+
+             var orden_compra_id = $(this).data('id');
+
+             $("#boton-editar" + orden_compra_id).prop("disabled", true);
+             $("#boton-editar" + orden_compra_id).html(`<i class="fa fa-circle-o-notch fa-spin" style="font-size:17px"></i><span style="font-size:13px;margin-left:5px">Editar</span>`);
+
+
+             $.get("{{ route('ordenes_compra.index') }}" + '/' + orden_compra_id + '/edit', function(data) {
+                 $('#modelHeading').html("Editar orden_compra");
+                 $('#saveBtn').val("edit-orden_compra");
+
+
+                 $('#orden_compra_id').val(data.id);
+                 $('#rut').val(data.rut);
+                 $('#nombre').val(data.nombre);
+                 $('#fecha_nacimiento').val(data.fecha_nacimiento);
+                 $('#genero').val(data.genero);
+                 $('#domicilio').val(data.domicilio);
+                 $('#ciudad').val(data.ciudad);
+                 $('#celular').val(data.celular);
+                 $('#cargo').val(data.cargo);
+                 $('#grupo_sangre').val(data.grupo_sangre);
+                 $('#peso').val(data.peso);
+                 $('#estatura').val(data.estatura);
+                 $('#enfermedad_base').val(data.enfermedad_base);
+                 $('#alergia').val(data.alergia);
+                 $('#medicamento_prescrito').val(data.medicamento_prescrito);
+                 $('#rut_empresa').val(data.rut_empresa);
+                 $('#nombre_empresa').val(data.nombre_empresa);
+                 $('#direccion_empresa').val(data.direccion_empresa);
+                 $('#ciudad_empresa').val(data.ciudad_empresa);
+                 $('#contacto_emergencia').val(data.contacto_emergencia);
+                 $('#cargo_contacto').val(data.cargo_contacto);
+                 $('#fono_emergencia').val(data.fono_emergencia);
+                 $('#observacion').val(data.observacion);
+                 //$('#foto').val(data.foto);
+
+                 if (data.foto) {
+
+                     $("#label_foto").text("FOTO CARGADA");
+                     $("#label_foto").css("color", "green");
+                 } else {
+                     $("#label_foto").text("FOTO SIN CARGAR");
+                     $("#label_foto").css("color", "red");
+                 }
+
+                 $.ajax({
+                     url: "{{URL::to('getDatosEmpresa')}}",
+                     type: 'GET',
+                     success: function(data1) {
+
+                         $("#boton-editar" + orden_compra_id).prop("disabled", false);
+                         $("#boton-editar" + orden_compra_id).html(`Editar`);
+
+                         $('#ajaxModel').modal('show');
+                         var sel = $("#mutualidad");
+                         sel.empty();
+                         for (var i = 0; i < data1.length; i++) {
+
+
+                             sel.append('<option value="' + data1[i].id + '">' + data1[i].nombre + '</option>');
+
+                             if (data.mutualidad == data1[i].id) {
+
+
+                                 sel.val(data1[i].id);
+                             }
+                         }
+
+                         //console.log(data.mutualidad);
+
+                     }
+                 })
+
+             })
+         }); */
+        /* $('#saveBtn').click(function(e) {
+            e.preventDefault();
+            $(this).html('Guardando...');
+
+            var data = new FormData($('#orden_compraForm')[0]);
+            $.ajax({
+                data: data,
+                url: "{{ route('ordenes_compra.store') }}",
+                type: "POST",
+
+                contentType: false,
+                processData: false,
+                success: function(data) {
+
+                    $('#orden_compraForm').trigger("reset");
+                    $('#ajaxModel').modal('hide');
+                    table.draw();
+
+                    $('#saveBtn').html('Guardar');
+
+
+
+
+                },
+                error: function(data) {
+                    console.log('Error:', data);
+                    $('#saveBtn').html('Error');
+
+                }
+            });
+        }); */
 
 
 

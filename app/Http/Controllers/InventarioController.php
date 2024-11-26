@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Models\OrdenCompra;
 use App\Models\OrdenCompraProducto;
 use App\Models\Proveedor;
+use App\Models\Producto;
 
 use Illuminate\Http\Request;
 use DataTables;
@@ -17,15 +18,12 @@ use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Laravel\Facades\Image;
 
 use App\Mail\OrdenMailable;
-use App\Models\Producto;
+
 use Illuminate\Support\Facades\Mail;
 use Log;
 
-class OrdenesCompraController extends Controller
+class InventarioController extends Controller
 {
-
-
-
     public function index(Request $request)
     {
 
@@ -77,8 +75,6 @@ class OrdenesCompraController extends Controller
 
                     if ($row->estado == 0) {
                         $btn = $btn . '<a style="color:black; margin-right:5px;margin-top:5px;margin-bottom:5px" href="javascript:void(0)" data-toggle="tooltip"  data-id_proveedor="' . $row->id_proveedor . '" data-id_orden="' . $row->id . '"  data-original-title="Enviar" class="btn btn-warning btn-sm enviarOrdenCompra">Enviar &nbsp;<i class="icon-envelope-letter ">&nbsp;</i></a>';
-                    }else if ($row->estado == 10 || $row->estado == 20) {
-                        $btn = $btn . '<a style="color:black; margin-right:5px;margin-top:5px;margin-bottom:5px" href="javascript:void(0)" data-toggle="tooltip"  data-id_proveedor="' . $row->id_proveedor . '" data-id_orden="' . $row->id . '"  data-original-title="Recepcionar" class="btn btn-info btn-sm recepcionarOrdenCompra">Recepcionar &nbsp;<i class="icon-social-dropbox ">&nbsp;</i></a>';
                     }
                     $btn = $btn . '<a style="color:black; margin-right:5px; margin-top:5px;margin-bottom:5px" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '"  data-original-title="VerQR" class="btn btn-success btn-sm verOrdenCompra">Ver &nbsp;<i class="icon-doc ">&nbsp;</i></a>';
 
@@ -94,110 +90,5 @@ class OrdenesCompraController extends Controller
 
 
         //return view('orden_compra', compact('ordenes_compra'));
-    }
-
-
-    public function guardarOrden(Request $request)
-    {
-        $items = $request->input('items');
-
-
-
-
-        $orden_compra =  OrdenCompra::create([
-            'numero' => $request->numero_orden,
-            'cotizacion' => $request->cotizacion,
-            'forma_pago' => $request->forma_pago,
-            'id_proveedor' => $request->proveedor,
-            'estado' => "0",
-
-        ]);
-
-
-        foreach ($items as $item) {
-            OrdenCompraProducto::create([
-                'id_orden' => $orden_compra->id,
-                'id_producto' => $item['id_producto'],
-                'cantidad' => $item['cantidad'],
-            ]);
-        }
-
-
-
-
-        return response()->json(['message' => "Orden de compra creada"]);
-    }
-
-    public function recepcionarOrden(Request $request)
-    {
-
-        
-    }
-
-    
-
-    public function enviarOrden(Request $request)
-    {
-
-
-
-
-        $id_proveedor = $request->input('id_proveedor');
-        $proveedor = Proveedor::find($id_proveedor);
-
-
-
-
-
-
-
-        try {
-            Mail::to($proveedor->email)->send(new OrdenMailable($proveedor->nombre, storage_path("app/public/orden_compra_1.pdf")));
-
-            // Verifica si hay errores en la cola de correo
-            if (count(Mail::failures()) > 0) {
-
-                // Si hay errores, registra los detalles y devuelve una respuesta de error
-                Log::error('Error al enviar correo: ' . implode(', ', Mail::failures()));
-                return response()->json(['success' => false, 'message' => 'Error al enviar correo', 'errors' => Mail::failures()]);
-            }
-
-      
-            $orden_compra = OrdenCompra::find($request->id_orden);
-            $orden_compra->update([
-                'estado' => "10",
-            ]);
-
-
-
-            return response()->json(['success' => true, 'message' => 'Correo enviado con éxito', 'email' => $proveedor->email]);
-        } catch (\Exception $e) {
-
-            // Registra el error en el log
-            Log::error('Error al enviar correo: ' . $e->getMessage());
-
-            // Devuelve una respuesta de error
-            return response()->json(['success' => false, 'message' => 'Error al enviar correo', 'error' => $e->getMessage()]);
-        }
-    }
-
-
-
-
-    
-    public function edit($id)
-    {
-        $orden_compra = OrdenCompra::find($id);
-        return response()->json($orden_compra);
-    }
-
-
-    public function destroy($id)
-    {
-        OrdenCompra::find($id)->delete();
-
-        OrdenCompraProducto::where('id_orden', $id)->delete();
-
-        return response()->json(['success' => 'Orden eliminada.']);
     }
 }

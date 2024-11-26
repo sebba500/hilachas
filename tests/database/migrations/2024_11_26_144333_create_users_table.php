@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,24 +15,13 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('admin')->default(false);
+            $table->boolean('admin')->default(0);
             $table->string('rut');
             $table->string('nombre');
             $table->string('password');
             $table->string('email', 100);
             $table->timestamps();
         });
-
-        // Crear un usuario al migrar
-        DB::table('users')->insert([
-            'admin' => '1',
-            'rut' => 'admin',
-            'nombre' => 'admin',
-            'email' => 'sebba500@hotmail.com',
-            'password' => Hash::make('12345'), // Encriptar la contraseña
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
     }
 
     /**
@@ -44,4 +33,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('users');
     }
-};
+}

@@ -47,10 +47,10 @@
 
 <body>
     <nav class="navbar navbar-dark sticky-top  flex-md-nowrap p-0 shadow" style="background-color: #5cb954fa;">
-    <h1 style=" font-weight: 900; padding: 10px 30px; border-right: 0.1px solid;" class="col-md-3 col-lg-2 mr-0 px-3"> <span style="color: white;">LOGO</span> <!-- <img src="{{ asset('images/logo.png') }}" alt="Imagen PNG" style="width: 100px; height: auto;margin-left: 20px;"> --> </h1> 
+        <h1 style=" font-weight: 900; padding: 10px 30px; border-right: 0.1px solid;" class="col-md-3 col-lg-2 mr-0 px-3"> <span style="color: white;">LOGO</span> <!-- <img src="{{ asset('images/logo.png') }}" alt="Imagen PNG" style="width: 100px; height: auto;margin-left: 20px;"> --> </h1>
 
         <!--  <a href="#" class="logo navbar-brand col-md-3 col-lg-2 mr-0 px-3" style="font-size: 30px;background-color: #3e64ff;"> <span>ID</span> <span style="color: #D4AF37;">GOLD</span> </a> -->
-       <!--  <img src="{{ asset('images/logo.png') }}" alt="Imagen PNG"  class="col-md-1 col-lg-1 mr-0 px-3"  style="width: 100px; height: auto" > -->
+        <!--  <img src="{{ asset('images/logo.png') }}" alt="Imagen PNG"  class="col-md-1 col-lg-1 mr-0 px-3"  style="width: 100px; height: auto" > -->
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -94,6 +94,13 @@
 
 
                             <a class="nav-link" id="nav-ordenes_compra" href="{{ url('/ListaOrdenesCompra') }}"><span data-feather="list"></span> Ordenes de Compra</a>
+
+                        </li>
+
+                        <li class="nav-item">
+
+
+                            <a class="nav-link" id="nav-inventario" href="{{ url('/Inventario') }}"><span data-feather="archive"></span> Inventario</a>
 
                         </li>
 

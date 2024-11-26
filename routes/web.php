@@ -44,6 +44,10 @@ Route::get('/ListaProveedores', function () {
     return view('proveedor');
 })->middleware('auth');
 
+Route::get('/Inventario', function () {
+    return view('inventario');
+})->middleware('auth');
+
 Route::get('/config', function () {
     return view('config');
 })->middleware('auth');
@@ -69,6 +73,7 @@ Route::get('/orden_compra/{id}', function ($id) {
 Route::get('/orden_compraVer/{id}', [OrdenesCompraController::class, 'orden_compraQR'])->name('orden_compraQR');
 Route::post('/enviarOrden', [OrdenesCompraController::class, 'enviarOrden'])->name('ordenesCompra.enviarOrden');
 Route::post('/guardarOrden', [OrdenesCompraController::class, 'guardarOrden'])->name('ordenesCompra.guardarOrden');
+Route::post('/recepcionarOrden', [OrdenesCompraController::class, 'recepcionarOrden'])->name('ordenesCompra.recepcionarOrden');
 
 Route::get('/getDatosProveedor', [ProveedoresController::class, 'getDatosProveedor'])->name('getDatosProveedor');
 

@@ -20,7 +20,7 @@ class InstruccionesController extends Controller
     public function store(Request $request)
     {
 
-
+//cambio prueba jijiji
 
 
         MaterialTextil::updateOrCreate(

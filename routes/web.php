@@ -6,12 +6,13 @@ use Illuminate\Support\Facades\Crypt;
 
 
 
-use App\Http\Controllers\OrdenesCompraController;
-use App\Http\Controllers\ProductosController;
+
+use App\Http\Controllers\ProductosTextilesController;
+use App\Http\Controllers\MaterialesTextilesController;
+use App\Http\Controllers\InstruccionesController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\ProveedoresController;
 use App\Http\Controllers\ConfigController;
-use App\Models\OrdenCompra;
+
 
 
 
@@ -21,32 +22,24 @@ Route::get('/', function () {
     return view('login');
 })->middleware('auth')->middleware('revalidate');
 
-Route::get('/ListaOrdenesCompra', function () {
-
-    /* $items = array();
-    $items[0]['nombre'] = 'producto 1';
-    $items[0]['precio'] = '1000';
-
-    $items[1]['nombre'] = 'producto 2';
-    $items[1]['precio'] = '2000'; */
 
 
-    /* return view('orden_compra')->with('items', $items); */
 
-    return view('orden_compra');
+
+
+
+Route::get('/ListaProductosTextiles', function () {
+    return view('productos_textiles');
+})->middleware('auth');
+Route::get('/ListaMaterialesTextiles', function () {
+    return view('materiales_textiles');
+})->middleware('auth');
+Route::get('/ListaInstrucciones', function () {
+    return view('instrucciones');
 })->middleware('auth');
 
-Route::get('/ListaProductos', function () {
-    return view('producto');
-})->middleware('auth');
 
-Route::get('/ListaProveedores', function () {
-    return view('proveedor');
-})->middleware('auth');
 
-Route::get('/Inventario', function () {
-    return view('inventario');
-})->middleware('auth');
 
 Route::get('/config', function () {
     return view('config');
@@ -54,31 +47,6 @@ Route::get('/config', function () {
 
 
 
-
-Route::get('/orden_compra/{id}', function ($id) {
-
-    $orden_compra = OrdenCompra::find($id);
-   
-    $headers = [
-        'Content-Description' => 'File Transfer',
-    ];
- 
-    $path = storage_path("app/public/orden_compra_1.pdf");
-    return response()->file($path,$headers);
-    //return view('orden_compra_qr')->with('qrcode', $qrcode)->with('id', $id)->with('rut', $orden_compra->rut)->with('nombre', $orden_compra->nombre);
-})->middleware('auth');
-
-
-
-Route::get('/orden_compraVer/{id}', [OrdenesCompraController::class, 'orden_compraQR'])->name('orden_compraQR');
-Route::post('/enviarOrden', [OrdenesCompraController::class, 'enviarOrden'])->name('ordenesCompra.enviarOrden');
-Route::post('/guardarOrden', [OrdenesCompraController::class, 'guardarOrden'])->name('ordenesCompra.guardarOrden');
-Route::post('/recepcionarOrden', [OrdenesCompraController::class, 'recepcionarOrden'])->name('ordenesCompra.recepcionarOrden');
-
-Route::get('/getDatosProveedor', [ProveedoresController::class, 'getDatosProveedor'])->name('getDatosProveedor');
-
-
-Route::get('/getDatosProducto/{id}', [ProductosController::class, 'getDatosProducto'])->name('getDatosProducto');
 
 
 
@@ -89,12 +57,12 @@ Route::post('/storePass', [ConfigController::class, 'storePass'])->name('config.
 
 
 
-
-
-Route::resource('ordenes_compra', OrdenesCompraController::class);
 Route::resource('config', ConfigController::class);
-Route::resource('productos', ProductosController::class);
-Route::resource('proveedores', ProveedoresController::class);
+
+
+Route::resource('productos_textiles', ProductosTextilesController::class);
+Route::resource('materiales_textiles', MaterialesTextilesController::class);
+Route::resource('instrucciones', InstruccionesController::class);
 
 
 Route::get('/', [LoginController::class, 'login'])->name('login');

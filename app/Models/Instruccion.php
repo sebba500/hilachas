@@ -5,16 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Producto extends Model
+class MaterialTextil extends Model
 {
-    protected $table='productos';
+    protected $table='materiales_textiles';
     
     protected $fillable = [
-        'codigo',
         'nombre',
         'detalles',
-        'precio',
-        'id_proveedor',
+ 
     
     ];
 

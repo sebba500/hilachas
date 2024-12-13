@@ -90,35 +90,31 @@
                     </h6>
                     <ul class="nav flex-column">
 
-                        <li class="nav-item">
 
-
-                            <a class="nav-link" id="nav-ordenes_compra" href="{{ url('/ListaOrdenesCompra') }}"><span data-feather="list"></span> Ordenes de Compra</a>
-
-                        </li>
 
                         <li class="nav-item">
 
-
-                            <a class="nav-link" id="nav-inventario" href="{{ url('/Inventario') }}"><span data-feather="archive"></span> Inventario</a>
-
-                        </li>
-
-                        <li class="nav-item">
-
-                            <a class="nav-link" id="nav-productos" href="{{ url('/ListaProductos') }}"><span data-feather="database"></span> Productos</a>
-
-
+                            <a class="nav-link" id="nav-instrucciones" href="{{ url('/ListaInstrucciones') }}"><span data-feather="scissors"></span> Instrucciones para desmontar</a>
 
 
                         </li>
 
                         <li class="nav-item">
 
+                            <a class="nav-link" id="nav-material_textil" href="{{ url('/ListaMaterialesTextiles') }}"><span data-feather="slack"></span> Materiales Textiles</a>
 
-                            <a class="nav-link" id="nav-proveedores" href="{{ url('/ListaProveedores') }}"><span data-feather="home"></span> Proveedores</a>
 
                         </li>
+
+
+                        <li class="nav-item">
+
+                            <a class="nav-link" id="nav-producto_textil" href="{{ url('/ListaProductosTextiles') }}"><span data-feather="tag"></span> Productos Textiles</a>
+
+
+                        </li>
+
+
 
 
 

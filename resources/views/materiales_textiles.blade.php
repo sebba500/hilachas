@@ -1,4 +1,4 @@
-<title>Proveedores</title>
+<title>Materiales Textiles</title>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,10 +11,10 @@
 
 <div>
     <div class="row" style="margin-top: 10px;margin-left: 10px;">
-        <h1>PROVEEDORES</h1>
+        <h1>Lista Materiales Textiles</h1>
 
       
-        <a class="btn btn-success" href="javascript:void(0)" id="createNewMutualidad" style="height: 40px;margin-left: 10px;margin-top: 10px;">AGREGAR</a>
+        <a class="btn btn-success" href="javascript:void(0)" id="createNewMaterialTextil" style="height: 40px;margin-left: 10px;margin-top: 10px;">AGREGAR</a>
       
     </div>
 
@@ -26,11 +26,8 @@
                <!--  <th>ID</th> -->
 
                 <th>Nombre</th>
-                <th>Rut</th>
-                <th>Email</th>
-                <th>Dirección</th>
-                <th>Teléfono</th>
-                <th>Contacto</th>
+                <th>Detalles</th>
+
                
 
                 <th width="300px">Acciones</th>
@@ -51,47 +48,24 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="proveedorForm" name="proveedorForm" class="form-horizontal" enctype="multipart/form-data">
-                    <input type="hidden" name="id_usuario" id="id_usuario">
-                    <input type="hidden" name="proveedor_id" id="proveedor_id">
+                <form id="materialTextilForm" name="materialTextilForm" class="form-horizontal" enctype="multipart/form-data">
+                   <!--  <input type="hidden" name="id_usuario" id="id_usuario"> -->
+                    <input type="hidden" name="material_textil_id" id="material_textil_id">
 
 
                     <div class="form-group">
-                        <label class="col-sm-4 control-label">Nombre</label>
+                        <label class="col-sm-4 control-label">Tipo</label>
                         <div class="col-sm-12">
                             <input type="text" id="nombre" name="nombre" placeholder="" class="form-control" required="">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-4 control-label">Rut</label>
+                        <label class="col-sm-4 control-label">Detalles</label>
                         <div class="col-sm-12">
-                            <input type="text" id="rut" name="rut" placeholder="" class="form-control" required="">
+                            <input type="text" id="detalles" name="detalles" placeholder="" class="form-control" required="">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Email</label>
-                        <div class="col-sm-12">
-                            <input type="email" id="email" name="email" placeholder="" class="form-control" required="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Dirección</label>
-                        <div class="col-sm-12">
-                            <input type="text" id="direccion" name="direccion" placeholder="" class="form-control" required="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Teléfono</label>
-                        <div class="col-sm-12">
-                            <input type="text" id="telefono" name="telefono" placeholder="" class="form-control" required="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Contacto</label>
-                        <div class="col-sm-12">
-                            <input type="text" id="contacto" name="contacto" placeholder="" class="form-control" required="">
-                        </div>
-                    </div>
+                  
         
 
 
@@ -118,8 +92,8 @@
             </div>
             <div class="modal-body col-lg-12">
 
-                <p>Seguro que desea eliminar la proveedor <strong id="label_nombre"></strong>?</p>
-                <input type="hidden" name="proveedor_id_eliminar" id="proveedor_id_eliminar">
+                <p>Seguro que desea eliminar el material textil <strong id="label_nombre"></strong>?</p>
+                <input type="hidden" name="material_textil_id_eliminar" id="material_textil_id_eliminar">
 
                 <button type="submit" class="btn btn-danger float-right eliminarButton" id="eliminarButton">Eliminar
                 </button>
@@ -135,7 +109,7 @@
 <script type="text/javascript">
     $(function() {
 
-        $("#nav-proveedores").addClass("active");
+        $("#nav-material_textil").addClass("active");
 
         var es_admin = <?= Auth::user()->admin ?>;
 
@@ -150,25 +124,10 @@
                     name: 'nombre'
                 },
                 {
-                    data: 'rut',
-                    name: 'rut'
+                    data: 'detalles',
+                    name: 'detalles'
                 },
-                {
-                    data: 'email',
-                    name: 'email'
-                },
-                {
-                    data: 'direccion',
-                    name: 'direccion'
-                },
-                {
-                    data: 'telefono',
-                    name: 'telefono'
-                },
-                {
-                    data: 'contacto',
-                    name: 'contacto'
-                },
+        
 
                 {
                     data: 'action',
@@ -214,29 +173,26 @@
             processing: true,
             serverSide: true,
             responsive: true,
-            ajax: "{{ route('proveedores.index') }}",
+            ajax: "{{ route('materiales_textiles.index') }}",
             columns: columnas
         });
-        $('#createNewMutualidad').click(function() {
-            $('#saveBtn').val("create-proveedor");
-            $('#proveedor_id').val('');
-            $('#proveedorForm').trigger("reset");
-            $('#modelHeading').html("Crear Proveedor");
+        $('#createNewMaterialTextil').click(function() {
+            $('#saveBtn').val("create-material-textil");
+            $('#material_textil_id').val('');
+            $('#materialTextilForm').trigger("reset");
+            $('#modelHeading').html("Agregar Material");
             $('#ajaxModel').modal('show');
         });
-        $('body').on('click', '.editMutualidad', function() {
-            var proveedor_id = $(this).data('id');
-            $.get("{{ route('proveedores.index') }}" + '/' + proveedor_id + '/edit', function(data) {
-                $('#modelHeading').html("Editar Proveedor");
-                $('#saveBtn').val("edit-proveedor");
+        $('body').on('click', '.editMaterialTextil', function() {
+            var material_textil_id = $(this).data('id');
+            $.get("{{ route('materiales_textiles.index') }}" + '/' + material_textil_id + '/edit', function(data) {
+                $('#modelHeading').html("Editar Material");
+                $('#saveBtn').val("edit-material-textil");
                 $('#ajaxModel').modal('show');
-                $('#proveedor_id').val(data.id);
+                $('#material_textil_id').val(data.id);
                 $('#nombre').val(data.nombre);
-                $('#rut').val(data.rut);
-                $('#email').val(data.email);
-                $('#direccion').val(data.direccion);
-                $('#telefono').val(data.telefono);
-                $('#contacto').val(data.contacto);
+                $('#detalles').val(data.detalles);
+ 
               
 
 
@@ -246,17 +202,17 @@
             e.preventDefault();
             $(this).html('Guardando...');
 
-            var data = new FormData($('#proveedorForm')[0]);
+            var data = new FormData($('#materialTextilForm')[0]);
             $.ajax({
                 data: data,
-                url: "{{ route('proveedores.store') }}",
+                url: "{{ route('materiales_textiles.store') }}",
                 type: "POST",
 
                 contentType: false,
                 processData: false,
                 success: function(data) {
 
-                    $('#proveedorForm').trigger("reset");
+                    $('#materialTextilForm').trigger("reset");
                     $('#ajaxModel').modal('hide');
                     table.draw();
 
@@ -270,41 +226,29 @@
             });
         });
 
-        $('body').on('click', '.deleteMutualidad', function() {
+        $('body').on('click', '.deleteMaterialTextil', function() {
 
 
             $('#deleteModal').modal('show');
 
-            var proveedor_id = $(this).data("id");
-            var proveedor_nombre = $(this).data("nombre");
+            var material_textil_id = $(this).data("id");
+            var material_textil_nombre = $(this).data("nombre");
 
-            $('#proveedor_id_eliminar').val(proveedor_id);
-            $("#label_nombre").text(proveedor_nombre);
-            /*
-             confirm("Are You sure want to delete !");
-
-             $.ajax({
-                 type: "DELETE",
-                 url: "{{ route('ordenes_compra.store') }}" + '/' + orden_compra_id,
-                 success: function(data) {
-                     table.draw();
-                 },
-                 error: function(data) {
-                     console.log('Error:', data);
-                 }
-             }); */
+            $('#material_textil_id_eliminar').val(material_textil_id);
+            $("#label_nombre").text(material_textil_nombre);
+          
         });
 
         $('body').on('click', '.eliminarButton', function() {
 
 
 
-            var proveedor_id = $("#proveedor_id_eliminar").val();
+            var material_textil_id = $("#material_textil_id_eliminar").val();
 
 
             $.ajax({
                 type: "DELETE",
-                url: "{{ route('proveedores.store') }}" + '/' + proveedor_id,
+                url: "{{ route('materiales_textiles.store') }}" + '/' + material_textil_id,
                 success: function(data) {
                     table.draw();
                     $('#deleteModal').modal('hide');

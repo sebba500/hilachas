@@ -13,9 +13,9 @@
     <div class="row" style="margin-top: 10px;margin-left: 10px;">
         <h1>Lista Instrucciones de Deconstruccion de Prendas</h1>
 
-      
-        <a class="btn btn-success" href="javascript:void(0)" id="createNewMaterialTextil" style="height: 40px;margin-left: 10px;margin-top: 10px;">AGREGAR</a>
-      
+
+        <a class="btn btn-success" href="javascript:void(0)" id="createNewInstruccion" style="height: 40px;margin-left: 10px;margin-top: 10px;">AGREGAR</a>
+
     </div>
 
 
@@ -23,13 +23,11 @@
     <table class="table table-bordered data-table" style="width:100%">
         <thead>
             <tr>
-               <!--  <th>ID</th> -->
+                <!--  <th>ID</th> -->
 
-                <th>Nombre</th>
-                <th>Detalles</th>
-
-               
-
+                <th>Tipo tejido</th>
+                <th>Material textil</th>
+                <th>Instrucciones</th>
                 <th width="300px">Acciones</th>
             </tr>
         </thead>
@@ -48,25 +46,47 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="materialTextilForm" name="materialTextilForm" class="form-horizontal" enctype="multipart/form-data">
-                   <!--  <input type="hidden" name="id_usuario" id="id_usuario"> -->
-                    <input type="hidden" name="material_textil_id" id="material_textil_id">
+                <form id="instruccionForm" name="instruccionForm" class="form-horizontal" enctype="multipart/form-data">
+                    <!--  <input type="hidden" name="id_usuario" id="id_usuario"> -->
+                    <input type="hidden" name="instruccion_id" id="instruccion_id">
 
 
                     <div class="form-group">
-                        <label class="col-sm-4 control-label">Tipo</label>
+                        <label class="col-sm-4 control-label">Tipo Tejido</label>
                         <div class="col-sm-12">
-                            <input type="text" id="nombre" name="nombre" placeholder="" class="form-control" required="">
+
+                            <select class="form-control" name="tipo_tejido" id="tipo_tejido">
+
+                            </select>
+
+
+
                         </div>
                     </div>
+
                     <div class="form-group">
-                        <label class="col-sm-4 control-label">Detalles</label>
+                        <label class="col-sm-4 control-label">Material Textil</label>
                         <div class="col-sm-12">
-                            <input type="text" id="detalles" name="detalles" placeholder="" class="form-control" required="">
+
+                            <select class="form-control" name="material_textil" id="material_textil">
+
+                            </select>
+
+
+
                         </div>
                     </div>
-                  
-        
+
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Instrucciones</label>
+                        <div class="col-sm-12">
+
+                            <textarea rows="4" id="instruccion" name="instruccion" style="width: 100%;"></textarea>
+                        </div>
+                    </div>
+
+
 
 
 
@@ -92,8 +112,8 @@
             </div>
             <div class="modal-body col-lg-12">
 
-                <p>Seguro que desea eliminar el material textil <strong id="label_nombre"></strong>?</p>
-                <input type="hidden" name="material_textil_id_eliminar" id="material_textil_id_eliminar">
+                <p>Seguro que desea eliminar el registro</strong>?</p>
+                <input type="hidden" name="instruccion_id_eliminar" id="instruccion_id_eliminar">
 
                 <button type="submit" class="btn btn-danger float-right eliminarButton" id="eliminarButton">Eliminar
                 </button>
@@ -113,30 +133,35 @@
 
         var es_admin = <?= Auth::user()->admin ?>;
 
-     
-            columnas = [/* {
-                    data: 'id',
-                    name: 'id'
-                }, */
 
-                {
-                    data: 'nombre',
-                    name: 'nombre'
-                },
-                {
-                    data: 'detalles',
-                    name: 'detalles'
-                },
-        
+        columnas = [
+            /* {
+                                data: 'id',
+                                name: 'id'
+                            }, */
 
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
-            ]
-     
+            {
+                data: 'nombre_tipo_tejido',
+                name: 'nombre_tipo_tejido'
+            },
+            {
+                data: 'nombre_materiales_textiles',
+                name: 'nombre_materiales_textiles'
+            },
+            {
+                data: 'instrucciones',
+                name: 'instrucciones'
+            },
+
+
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false
+            },
+        ]
+
 
         $.ajaxSetup({
             headers: {
@@ -173,27 +198,114 @@
             processing: true,
             serverSide: true,
             responsive: true,
-            ajax: "{{ route('materiales_textiles.index') }}",
+            ajax: "{{ route('instrucciones.index') }}",
             columns: columnas
         });
-        $('#createNewMaterialTextil').click(function() {
-            $('#saveBtn').val("create-material-textil");
-            $('#material_textil_id').val('');
-            $('#materialTextilForm').trigger("reset");
-            $('#modelHeading').html("Agregar Material");
-            $('#ajaxModel').modal('show');
+        $('#createNewInstruccion').click(function() {
+
+            $('#saveBtn').html('Guardar');
+            $("#saveBtn").css("background-color", "#007bff");
+
+
+            $('#instruccion_id').val('');
+            $('#instruccionForm').trigger("reset");
+            $('#modelHeading').html("Agregar Instruccion");
+
+            $.ajax({
+                url: "{{URL::to('getDatosParaInstrucciones')}}",
+                type: 'GET',
+                success: function(data) {
+
+
+                    var sel = $("#tipo_tejido");
+                    sel.empty();
+                    for (var i = 0; i < data.tipos_tejidos.length; i++) {
+                        sel.append('<option value="' + data.tipos_tejidos[i].id + '">' + data.tipos_tejidos[i].nombre + '</option>');
+                    }
+
+                    var sel = $("#material_textil");
+                    sel.empty();
+                    for (var i = 0; i < data.materiales_textiles.length; i++) {
+                        sel.append('<option value="' + data.materiales_textiles[i].id + '">' + data.materiales_textiles[i].nombre + '</option>');
+                    }
+
+
+                    $("#createNewInstruccion").prop("disabled", false);
+                    $("#createNewInstruccion").html(`AGREGAR`);
+
+                    $('#ajaxModel').modal('show');
+
+                }
+            })
+
+
+
+
         });
-        $('body').on('click', '.editMaterialTextil', function() {
-            var material_textil_id = $(this).data('id');
-            $.get("{{ route('materiales_textiles.index') }}" + '/' + material_textil_id + '/edit', function(data) {
-                $('#modelHeading').html("Editar Material");
-                $('#saveBtn').val("edit-material-textil");
-                $('#ajaxModel').modal('show');
-                $('#material_textil_id').val(data.id);
-                $('#nombre').val(data.nombre);
-                $('#detalles').val(data.detalles);
- 
-              
+        $('body').on('click', '.editInstruccion', function() {
+
+
+            $('#saveBtn').html('Guardar');
+            $("#saveBtn").css("background-color", "#007bff");
+
+            var instruccion_id = $(this).data('id');
+
+            $("#boton-editar" + instruccion_id).prop("disabled", true);
+            $("#boton-editar" + instruccion_id).html(`<i class="fa fa-circle-o-notch fa-spin" style="font-size:17px"></i><span style="font-size:13px;margin-left:5px">Editar &nbsp;<i class="icon-pencil ">&nbsp;</i></span>`);
+
+            $.get("{{ route('instrucciones.index') }}" + '/' + instruccion_id + '/edit', function(data) {
+                $('#modelHeading').html("Editar Instrucción");
+
+                $.ajax({
+                    url: "{{URL::to('getDatosParaInstrucciones')}}",
+                    type: 'GET',
+                    success: function(data1) {
+
+                        var sel = $("#tipo_tejido");
+                        sel.empty();
+
+                        for (var i = 0; i < data1.tipos_tejidos.length; i++) {
+
+                            sel.append('<option value="' + data1.tipos_tejidos[i].id + '">' + data1.tipos_tejidos[i].nombre + '</option>');
+
+
+                            if (data.id_tipo_tejido == data1.tipos_tejidos[i].id) {
+
+
+                                sel.val(data1.tipos_tejidos[i].id);
+                            }
+                        }
+
+                        var sel = $("#material_textil");
+                        sel.empty();
+
+                        for (var i = 0; i < data1.materiales_textiles.length; i++) {
+
+                            sel.append('<option value="' + data1.materiales_textiles[i].id + '">' + data1.materiales_textiles[i].nombre + '</option>');
+
+
+                            if (data.id_material_textil == data1.materiales_textiles[i].id) {
+
+
+                                sel.val(data1.materiales_textiles[i].id);
+                            }
+                        }
+
+
+                        $("#boton-editar" + instruccion_id).prop("disabled", false);
+                        $("#boton-editar" + instruccion_id).html(`Editar &nbsp;<i class="icon-pencil ">&nbsp;</i>`);
+
+                        $('#ajaxModel').modal('show');
+                        $('#instruccion_id').val(data.id);
+                        $('#instruccion').val(data.instrucciones);
+
+                    }
+                })
+
+
+
+
+
 
 
             })
@@ -202,53 +314,58 @@
             e.preventDefault();
             $(this).html('Guardando...');
 
-            var data = new FormData($('#materialTextilForm')[0]);
+            var data = new FormData($('#instruccionForm')[0]);
+
+
             $.ajax({
                 data: data,
-                url: "{{ route('materiales_textiles.store') }}",
+                url: "{{ route('instrucciones.store') }}",
                 type: "POST",
 
                 contentType: false,
                 processData: false,
                 success: function(data) {
 
-                    $('#materialTextilForm').trigger("reset");
+                    $('#instruccionForm').trigger("reset");
                     $('#ajaxModel').modal('hide');
                     table.draw();
 
                     $('#saveBtn').html('Guardar');
-
+                    $("#saveBtn").css("background-color", "#007bff");
                 },
                 error: function(data) {
                     console.log('Error:', data);
                     $('#saveBtn').html('Error');
+                    $("#saveBtn").css("background-color", "#007bff");
                 }
             });
+            //}
+
         });
 
-        $('body').on('click', '.deleteMaterialTextil', function() {
+        $('body').on('click', '.deleteInstruccion', function() {
 
 
             $('#deleteModal').modal('show');
 
-            var material_textil_id = $(this).data("id");
-            var material_textil_nombre = $(this).data("nombre");
+            var instruccion_id = $(this).data("id");
+            /*  var minstruccion_nombre = $(this).data("nombre"); */
 
-            $('#material_textil_id_eliminar').val(material_textil_id);
-            $("#label_nombre").text(material_textil_nombre);
-          
+            $('#instruccion_id_eliminar').val(instruccion_id);
+            /* $("#label_nombre").text(material_textil_nombre); */
+
         });
 
         $('body').on('click', '.eliminarButton', function() {
 
 
 
-            var material_textil_id = $("#material_textil_id_eliminar").val();
+            var instruccion_id = $("#instruccion_id_eliminar").val();
 
 
             $.ajax({
                 type: "DELETE",
-                url: "{{ route('materiales_textiles.store') }}" + '/' + material_textil_id,
+                url: "{{ route('instrucciones.store') }}" + '/' + instruccion_id,
                 success: function(data) {
                     table.draw();
                     $('#deleteModal').modal('hide');

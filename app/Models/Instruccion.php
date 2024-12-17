@@ -5,16 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MaterialTextil extends Model
+class Instruccion extends Model
 {
-    protected $table='materiales_textiles';
-    
-    protected $fillable = [
-        'nombre',
-        'detalles',
- 
-    
-    ];
+    protected $table = 'instrucciones';
 
-    
+    protected $fillable = [
+        'id_tipo_tejido',
+        'id_material_textil',
+        'instrucciones',
+
+    ];
 }

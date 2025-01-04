@@ -8337,3 +8337,198 @@ a[data-toggle="collapse"] {
   .btn.btn-primary:hover, .btn.btn-primary:focus {
     background: #3e64ff !important;
     border-color: #3e64ff !important; }
+
+
+    /* ///////////////////////////// */
+
+
+
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+  }
+
+  @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+      }
+  }
+
+
+
+
+
+
+   
+  
+  .hidden-select {
+      display: none;
+  }
+  
+  .card-button {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      /* suaviza el efecto */
+      cursor: pointer;
+  }
+  
+  .card-button:hover {
+      transform: scale(1.05);
+      /* aumenta el tamaño al pasar el mouse */
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+      /* agrega una sombra mas prominente */
+  }
+  
+  .card.active {
+      border: 2px solid #007bff;
+      /* borde azul para destacar */
+      box-shadow: 0px 10px 20px rgba(0, 123, 255, 0.3);
+      /* sombra azul */
+      transform: scale(1.05);
+      /* agrandar un poco */
+  }
+  
+  .custom-select {
+      appearance: none;
+      /* oculta los bordes y estilos predeterminados */
+      padding: 0.5rem;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+  }
+  
+  .custom-select:hover,
+  .custom-select:focus {
+      background-color: #f8f9fa;
+      /* ligero cambio de fondo al interactuar */
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .fixed-height {
+      height: 130px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* centra verticalmente el contenido */
+      
+  
+      overflow: hidden;  /* oculta el contenido que exceda la altura */
+     
+  }
+  
+
+
+
+
+  .color-wheel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.color-wheel {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    width: 90%;
+    margin: 20px auto;
+}
+
+.color-option {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    position: relative;
+    transition: transform 0.2s, border 0.2s;
+}
+
+.color-option:hover,
+.color-option.selected {
+    transform: scale(1.2);
+    border: 2px solid #000;
+}
+
+/*  tooltip */
+.color-option::after {
+    content: attr(data-value);
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+.color-option:hover::after {
+    opacity: 1;
+}
+
+.color-groups {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap; /* Permite ajustar a dos filas */
+}
+
+.color-group {
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  flex: 1;
+  text-align: center;
+  min-width: 45%; /* Para asegurar que dos cuadros quepan en una fila */
+}
+
+.color-group h5 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.color-option {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  background-size: cover; /* La imagen cubrirá todo el círculo */
+  background-position: center; /* Centrar la imagen */
+}
+
+.color-option:hover {
+  transform: scale(1.2); /* Ampliar al pasar el cursor */
+}
+
+.pattern-option {
+  border: 1px solid #ccc; /* Opcional: añadir un borde a los estampados */
+}
+
+.warm-colors {
+  border-color: #FEA47F;
+}
+
+.cool-colors {
+  border-color: #6A89CC;
+}
+
+.light-patterns {
+  border-color: #BDC3C7;
+}
+
+.dark-patterns {
+  border-color: #2C3E50;
+}
+

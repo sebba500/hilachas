@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.bootstrap4.min.css">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css?v=echo filemtime();">
 
     <!-- imports alertify -->
@@ -27,20 +28,7 @@
 
     <link href="css/dashboard.css" rel="stylesheet">
     <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
+      
     </style>
 
 </head>
@@ -94,14 +82,21 @@
 
                         <li class="nav-item">
 
-                            <a class="nav-link" id="nav-instrucciones" href="{{ url('/ListaInstrucciones') }}"><span data-feather="scissors"></span> Instrucciones para desmontar</a>
+                            <a class="nav-link" id="nav-inventario" href="{{ url('/InventarioPrendas') }}"><span style="color: black;" data-feather="package"></span> Inventario</a>
 
 
                         </li>
 
                         <li class="nav-item">
 
-                            <a class="nav-link" id="nav-material_textil" href="{{ url('/ListaMaterialesTextiles') }}"><span data-feather="slack"></span> Materiales Textiles</a>
+                            <a class="nav-link" id="nav-instrucciones" href="{{ url('/ListaInstrucciones') }}"><span style="color: black;" data-feather="scissors"></span> Instrucciones para desmontar</a>
+
+
+                        </li>
+
+                        <li class="nav-item">
+
+                            <a class="nav-link" id="nav-material_textil" href="{{ url('/ListaMaterialesTextiles') }}"><span style="color:black" data-feather="slack"></span> Materiales Textiles</a>
 
 
                         </li>
@@ -109,7 +104,7 @@
 
                         <li class="nav-item">
 
-                            <a class="nav-link" id="nav-producto_textil" href="{{ url('/ListaProductosTextiles') }}"><span data-feather="tag"></span> Productos Textiles</a>
+                            <a class="nav-link" id="nav-producto_textil" href="{{ url('/ListaProductosTextiles') }}"><i class="fa-solid fa-shirt"></i>Productos Textiles</a>
 
 
                         </li>

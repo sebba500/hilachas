@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->boolean('admin')->default(false);
-            $table->string('rut');
-            $table->string('nombre');
-            $table->string('password');
-            $table->string('email', 100);
+        Schema::create('inventario_materias_primas', function (Blueprint $table) {
+            $table->integer('id', true);
+            $table->integer('id_material_textil');
+            $table->string('color', 200);
+            $table->string('color_codigo', 15);
+            $table->decimal('peso', 5, 1);
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('inventario_materias_primas');
     }
 };

@@ -22,10 +22,6 @@ class InstruccionesController extends Controller
     {
 
 
-
-
-
-
         if ($request->ajax()) {
 
 
@@ -109,10 +105,23 @@ class InstruccionesController extends Controller
     {
 
 
+        /*   $tipoTejido = $request->input('tipo_tejido');
+
+        $tipos_tejidos = DB::table('tipos_tejidos')
+            ->leftJoin('instrucciones', 'tipos_tejidos.id', '=', 'instrucciones.id_tipo_tejido')
+            ->whereNull('instrucciones.id')
+            ->select('tipos_tejidos.*')
+            ->get();
+
+        $materiales_textiles = DB::table('materiales_textiles')
+            ->leftJoin('instrucciones', 'materiales_textiles.id', '=', 'instrucciones.id_material_textil')
+            ->whereNull('instrucciones.id')
+            ->select('materiales_textiles.*')
+            ->get(); */
 
         $tipos_tejidos = TipoTejido::get();
         $materiales_textiles = MaterialTextil::get();
-        
+
 
 
         return response()->json(['tipos_tejidos' => $tipos_tejidos, "materiales_textiles" => $materiales_textiles]);
@@ -120,6 +129,22 @@ class InstruccionesController extends Controller
         //return view('orden_compra_ver')->with('orden_compra',json_encode($orden_compra));
     }
 
+
+    public function getDatosInstruccionesFiltradas(Request $request)
+    {
+
+
+
+        $instruccion = Instruccion::where('id_tipo_tejido', $request->datos['id_tipo_tejido'])
+            ->where('id_material_textil', $request->datos['id_material_textil'])
+            ->select('instrucciones')
+            ->first();
+
+
+        return response()->json(['instrucciones' => $instruccion ? $instruccion->instrucciones : null]);
+
+        //return view('orden_compra_ver')->with('orden_compra',json_encode($orden_compra));
+    }
 
     public function edit($id)
     {

@@ -10,6 +10,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class TiposTejidosController extends Controller
 {
@@ -19,7 +20,7 @@ class TiposTejidosController extends Controller
 
 
 
-       /*  MaterialTextil::updateOrCreate(
+        /*  MaterialTextil::updateOrCreate(
             ['id' => $request->material_textil_id],
             [
                 'nombre' => $request->nombre, 'detalles' => $request->detalles,
@@ -35,7 +36,7 @@ class TiposTejidosController extends Controller
     public function index(Request $request)
     {
 
-      /*   $user = Auth::user();
+        /*   $user = Auth::user();
 
 
         if ($request->ajax()) {
@@ -73,6 +74,27 @@ class TiposTejidosController extends Controller
 
 
         $tipos_tejidos = TipoTejido::get();
+
+
+
+        return response()->json(['tipos_tejidos' => $tipos_tejidos]);
+
+        //return view('orden_compra_ver')->with('orden_compra',json_encode($orden_compra));
+    }
+
+    public function getDatosPorTejido(Request $request)
+    {
+
+
+
+
+
+        $tipos_tejidos = DB::table('tipos_tejidos')
+            ->leftJoin('inventario_prendas', 'tipos_tejidos.id', '=', 'inventario_prendas.id_tipo_tejido')
+            ->select('tipos_tejidos.id as id_tipo_tejido', 'tipos_tejidos.nombre', DB::raw('COUNT(inventario_prendas.id) as total'))
+            ->groupBy('tipos_tejidos.id', 'tipos_tejidos.nombre')
+            ->where('inventario_prendas.procesada',0)
+            ->get();
 
 
 

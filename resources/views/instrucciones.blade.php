@@ -129,6 +129,29 @@
 <script type="text/javascript">
     $(function() {
 
+    
+       /*  const tipoTejidoSelect = document.getElementById("tipo_tejido");
+        tipoTejidoSelect.addEventListener("change", function(event) {
+            
+            const selectedValue = event.target.value;
+
+    
+            $.ajax({
+            url: "{{URL::to('getDatosParaInstrucciones')}}",
+            type: 'GET',
+            data: { tipo_tejido: selectedValue }, // Enviar el valor seleccionado
+            success: function(data) {
+                console.log("Datos recibidos:", data.dato);
+                // Aquí puedes manejar la respuesta
+            },
+            error: function(xhr, status, error) {
+                console.error("Error:", error);
+            }
+        });
+        }); */
+
+
+
         $("#nav-instrucciones").addClass("active");
 
         var es_admin = <?= Auth::user()->admin ?>;

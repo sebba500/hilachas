@@ -10,7 +10,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
+use DB;
 class ProductosTextilesController extends Controller
 {
     public function store(Request $request)
@@ -78,7 +78,20 @@ class ProductosTextilesController extends Controller
 
         return response()->json(['productos_textiles' => $productos_textiles]);
 
-        //return view('orden_compra_ver')->with('orden_compra',json_encode($orden_compra));
+       
+    }
+
+    public function getCantidadProducto(Request $request)
+    {
+        $idProducto = $request->input('id_producto_textil');
+
+        // Consulta para contar las filas relacionadas
+        $cantidad = DB::table('inventario_prendas')
+            ->where('id_producto_textil', $idProducto)
+            ->where('procesada',0)
+            ->count();
+
+        return response()->json(['cantidad' => $cantidad]);
     }
 
 

@@ -1,0 +1,95 @@
+[06-May-2024 19:43:53 UTC] PHP Warning:  require(/home/certilab/public_html/laravel/vendor/composer/../guzzlehttp/promises/src/functions_include.php): Failed to open stream: No such file or directory in /home/certilab/public_html/laravel/vendor/composer/autoload_real.php on line 76
+[06-May-2024 19:43:53 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/certilab/public_html/laravel/vendor/composer/../guzzlehttp/promises/src/functions_include.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/certilab/public_html/laravel/vendor/composer/autoload_real.php:76
+Stack trace:
+#0 /home/certilab/public_html/laravel/vendor/composer/autoload_real.php(59): composerRequired729ed608f048004776b79c8301f6768('c964ee0ededf28c...', '/home/certilab/...')
+#1 /home/certilab/public_html/laravel/vendor/autoload.php(7): ComposerAutoloaderInitd729ed608f048004776b79c8301f6768::getLoader()
+#2 /home/certilab/public_html/laravel/public/index.php(34): require('/home/certilab/...')
+#3 {main}
+  thrown in /home/certilab/public_html/laravel/vendor/composer/autoload_real.php on line 76
+[06-May-2024 19:43:55 UTC] PHP Warning:  require(/home/certilab/public_html/laravel/vendor/composer/../guzzlehttp/promises/src/functions_include.php): Failed to open stream: No such file or directory in /home/certilab/public_html/laravel/vendor/composer/autoload_real.php on line 76
+[06-May-2024 19:43:55 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/certilab/public_html/laravel/vendor/composer/../guzzlehttp/promises/src/functions_include.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/certilab/public_html/laravel/vendor/composer/autoload_real.php:76
+Stack trace:
+#0 /home/certilab/public_html/laravel/vendor/composer/autoload_real.php(59): composerRequired729ed608f048004776b79c8301f6768('c964ee0ededf28c...', '/home/certilab/...')
+#1 /home/certilab/public_html/laravel/vendor/autoload.php(7): ComposerAutoloaderInitd729ed608f048004776b79c8301f6768::getLoader()
+#2 /home/certilab/public_html/laravel/public/index.php(34): require('/home/certilab/...')
+#3 {main}
+  thrown in /home/certilab/public_html/laravel/vendor/composer/autoload_real.php on line 76
+[06-May-2024 19:44:11 UTC] PHP Warning:  require(/home/certilab/public_html/laravel/vendor/composer/../guzzlehttp/promises/src/functions_include.php): Failed to open stream: No such file or directory in /home/certilab/public_html/laravel/vendor/composer/autoload_real.php on line 76
+[06-May-2024 19:44:11 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/certilab/public_html/laravel/vendor/composer/../guzzlehttp/promises/src/functions_include.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/certilab/public_html/laravel/vendor/composer/autoload_real.php:76
+Stack trace:
+#0 /home/certilab/public_html/laravel/vendor/composer/autoload_real.php(59): composerRequired729ed608f048004776b79c8301f6768('c964ee0ededf28c...', '/home/certilab/...')
+#1 /home/certilab/public_html/laravel/vendor/autoload.php(7): ComposerAutoloaderInitd729ed608f048004776b79c8301f6768::getLoader()
+#2 /home/certilab/public_html/laravel/public/index.php(34): require('/home/certilab/...')
+#3 {main}
+  thrown in /home/certilab/public_html/laravel/vendor/composer/autoload_real.php on line 76
+[06-May-2024 19:44:13 UTC] PHP Warning:  require(/home/certilab/public_html/laravel/vendor/composer/../guzzlehttp/promises/src/functions_include.php): Failed to open stream: No such file or directory in /home/certilab/public_html/laravel/vendor/composer/autoload_real.php on line 76
+[06-May-2024 19:44:13 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/certilab/public_html/laravel/vendor/composer/../guzzlehttp/promises/src/functions_include.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/certilab/public_html/laravel/vendor/composer/autoload_real.php:76
+Stack trace:
+#0 /home/certilab/public_html/laravel/vendor/composer/autoload_real.php(59): composerRequired729ed608f048004776b79c8301f6768('c964ee0ededf28c...', '/home/certilab/...')
+#1 /home/certilab/public_html/laravel/vendor/autoload.php(7): ComposerAutoloaderInitd729ed608f048004776b79c8301f6768::getLoader()
+#2 /home/certilab/public_html/laravel/public/index.php(34): require('/home/certilab/...')
+#3 {main}
+  thrown in /home/certilab/public_html/laravel/vendor/composer/autoload_real.php on line 76
+[09-May-2024 02:47:35 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 7.4.33. in /home/certilab/public_html/laravel/vendor/composer/platform_check.php on line 24
+[09-May-2024 02:48:42 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 7.4.33. in /home/certilab/public_html/laravel/vendor/composer/platform_check.php on line 24
+[09-May-2024 02:51:36 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 7.4.33. in /home/certilab/public_html/laravel/vendor/composer/platform_check.php on line 24
+[09-May-2024 02:55:17 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 7.4.33. in /home/certilab/public_html/laravel/vendor/composer/platform_check.php on line 24
+[09-May-2024 05:32:32 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 7.4.33. in /home/certilab/public_html/laravel/vendor/composer/platform_check.php on line 24
+[09-May-2024 05:36:50 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 7.4.33. in /home/certilab/public_html/laravel/vendor/composer/platform_check.php on line 24
+[10-May-2024 14:30:56 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 7.4.33. in /home/certilab/public_html/laravel/vendor/composer/platform_check.php on line 24
+[10-May-2024 14:31:20 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 7.4.33. in /home/certilab/public_html/laravel/vendor/composer/platform_check.php on line 24
+[10-May-2024 14:32:47 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 7.4.33. in /home/certilab/public_html/laravel/vendor/composer/platform_check.php on line 24
+[10-May-2024 14:33:08 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 8.0.30. in /home/certilab/public_html/laravel/vendor/composer/platform_check.php on line 24
+[10-May-2024 14:33:11 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 8.0.30. in /home/certilab/public_html/laravel/vendor/composer/platform_check.php on line 24
+[31-May-2024 17:35:32 UTC] POST / HTTP/1.1
+Accept:                    text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding:           gzip, deflate, br, zstd
+Accept-Language:           es-ES,es;q=0.9,en;q=0.8
+Cache-Control:             max-age=0
+Connection:                keep-alive
+Content-Length:            72
+Content-Type:              application/x-www-form-urlencoded
+Cookie:                    _ga_QWQ2BWJCQQ=GS1.1.1710768310.1.1.1710768857.57.0.0; _ga_CCMPVVQV0T=GS1.1.1712858087.4.1.1712858370.0.0.0; _ga_4KK5EDXW9S=GS1.1.1713472284.73.1.1713474599.59.0.0; _ga_SBN7PQ4QSD=GS1.1.1713472284.73.1.1713474599.59.0.0; _ga=GA1.2.86714799.1710251491; XSRF-TOKEN=eyJpdiI6ImdhOWtRM0E4T2JmbDAzTWZjVUQ1c0E9PSIsInZhbHVlIjoicXVWVW90Tk5VbkpaZHJCUFVJOGpQdnlmN2tSckhoOVFSNkVKSkpKZy9MVGVEL3lzNndQNVVBUU42YVRoTlVKWHIxY1hlcWd5b2xOQWprakVKQndqa2p3ZEdwSFd3ckpIVXM5THBzcnpFaE1hNmd2QWdNMkc2NEhtV1Rxak8yV3IiLCJtYWMiOiI2YzM2YTQ0OTI4NjllNWMwYzE3YzFlMjUyN2VhYzBlNzdjOWRlN2Q3ZDEwMTA5ZjlhZGZjMjU3NjFhZmNjMzc5IiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6ImtMRTZWZHUzL0tNV3Z4N3Q2Ym4rYVE9PSIsInZhbHVlIjoia0t2Q0pGUENIbzJiQkw0aElWekdkeUdtTmpuWS9QZ1BGVGF4UUlQbGcvUzc5bHp2WnJiNWEycHN2eTMreFVPRHN1SWc1M1F5a05BQ3R5ZVZodXVPeXpyL2xXRWJUbG9UYVo2dEFxeGJqQkswSVhFSDh0TGxWUVh1K0ozMjljOWQiLCJtYWMiOiIzYzRiNzEyNDQ0NmJiMDIwODU0NTc4YmViYmFhNTc4Nzk5M2FiYWY2Yzg4OGE2OTVmMDE4NjhiNzVjMGEzNjdjIiwidGFnIjoiIn0%3D
+Host:                      laravel.certilab.cl
+Origin:                    https://laravel.certilab.cl
+Referer:                   https://laravel.certilab.cl/
+Sec-Ch-Ua:                 "Google Chrome";v="125", "Chromium";v="125", "Not.A/Brand";v="24"
+Sec-Ch-Ua-Mobile:          ?0
+Sec-Ch-Ua-Platform:        "Windows"
+Sec-Fetch-Dest:            document
+Sec-Fetch-Mode:            navigate
+Sec-Fetch-Site:            same-origin
+Sec-Fetch-User:            ?1
+Upgrade-Insecure-Requests: 1
+User-Agent:                Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36
+Cookie: _ga_QWQ2BWJCQQ=; _ga_CCMPVVQV0T=; _ga_4KK5EDXW9S=; _ga_SBN7PQ4QSD=; _ga=; XSRF-TOKEN=czkgdM5zzQJGbSZrrjBl0xOHDgUHbeh14P5k4lh7; laravel_session=d6o2HfOE26OpVm3eMr9UJ3ojK5hPR6c8JnPdIUoe
+
+_token=czkgdM5zzQJGbSZrrjBl0xOHDgUHbeh14P5k4lh7&rut=admin&password=12345
+[31-May-2024 17:35:48 UTC] POST / HTTP/1.1
+Accept:                    text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding:           gzip, deflate, br, zstd
+Accept-Language:           es-ES,es;q=0.9,en;q=0.8
+Cache-Control:             no-cache
+Connection:                keep-alive
+Content-Length:            72
+Content-Type:              application/x-www-form-urlencoded
+Cookie:                    _ga_QWQ2BWJCQQ=GS1.1.1710768310.1.1.1710768857.57.0.0; _ga_CCMPVVQV0T=GS1.1.1712858087.4.1.1712858370.0.0.0; _ga_4KK5EDXW9S=GS1.1.1713472284.73.1.1713474599.59.0.0; _ga_SBN7PQ4QSD=GS1.1.1713472284.73.1.1713474599.59.0.0; _ga=GA1.2.86714799.1710251491; XSRF-TOKEN=eyJpdiI6Ii9JdVd4TVdFZTNoNHA1d1JPZytRSnc9PSIsInZhbHVlIjoiOU94RDZ3Q1hPWmFUcTlDTWx6MUNtOG5kZ3Q3YWhNK1hiUGZxL0gyUjF1ckVDMXUyWWNGdnZiUVVPZHQwZ2t4YjRReXd3N1ZzYlgrYWt4NEYzc0pZMXV0czVxWVhpL3FWeGJ0UWpZMnRDSkRBTEZiS1JaVlRaNU9iTFREWFJWSnciLCJtYWMiOiIwMjgzNGFiMzFmZGIxOWIwNDEzZThlYmM5Y2U5ODg2OGE4YjQ1Y2FlMTJlZGI1MTQwYzc2OTY2ZDRhOGU5M2QzIiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6ImJBQ3dPaHJGd0ZKOTJQdGxPcjlXbnc9PSIsInZhbHVlIjoibWRYNWh3c0JyUGJaZzZNZktwQTk5WWgxaExYVU91UU56bzY0bWljUW9lZkhJb2VDMGVzUHhXMnNSZkNaNXdOVnJIL2NFOUwrd3lKOVNFVW45alEwdTNKa21IZVF1Nkd4VklnTjl5M3hvaGZrN0ZJMm1rZDRydkhxMTVlNUpUVDIiLCJtYWMiOiIzYzYxNzM3MTk1ZWQ3YTNiNzhjNDk0OGNiYTliM2YzNTlhNDg5YjVlOThmYmE1Y2UxNWY4ZmE0ZmIwZTQ0ZDYwIiwidGFnIjoiIn0%3D
+Host:                      laravel.certilab.cl
+Origin:                    https://laravel.certilab.cl
+Pragma:                    no-cache
+Referer:                   https://laravel.certilab.cl/
+Sec-Ch-Ua:                 "Google Chrome";v="125", "Chromium";v="125", "Not.A/Brand";v="24"
+Sec-Ch-Ua-Mobile:          ?0
+Sec-Ch-Ua-Platform:        "Windows"
+Sec-Fetch-Dest:            document
+Sec-Fetch-Mode:            navigate
+Sec-Fetch-Site:            same-origin
+Sec-Fetch-User:            ?1
+Upgrade-Insecure-Requests: 1
+User-Agent:                Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36
+Cookie: _ga_QWQ2BWJCQQ=; _ga_CCMPVVQV0T=; _ga_4KK5EDXW9S=; _ga_SBN7PQ4QSD=; _ga=; XSRF-TOKEN=CotejboKIY4aSz5AYWl2X0BO4ws6euJp1L0fCILM; laravel_session=qsJU5cGftPyfTr7GeFRUawvnpJVjDPQcm1YzJmW3
+
+_token=CotejboKIY4aSz5AYWl2X0BO4ws6euJp1L0fCILM&rut=admin&password=12345
+[31-May-2024 17:37:52 UTC] do something
+[31-May-2024 17:46:46 UTC] do something
+[05-Jun-2024 20:32:08 UTC] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home/certilab/public_html/laravel/app/Http/Controllers/TrabajadoresController.php on line 4

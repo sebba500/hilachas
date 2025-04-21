@@ -16,6 +16,7 @@ class InventarioPrendas extends Model
         'origen',
         'color',
         'color_codigo',
+        'estampado',
         'procesada',
 
     ];

@@ -126,8 +126,9 @@
                                             <i class="fa-solid fa-cube  font-large-3 float-left" style="color:${dato.color_codigo}"></i>
                                         </div>
                                         <div class="media-body text-right">
-                                            <h3>${dato.nombre_material_textil}</h3>
+                                            <h5>${dato.nombre_material_textil}(${dato.estampado})</h5>
                                             <h4>${dato.color}</h4>
+                                           
                                             <span>${dato.peso} Kg</span>
                                         </div>
                                     </div>

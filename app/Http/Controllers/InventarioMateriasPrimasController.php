@@ -109,6 +109,7 @@ class InventarioMateriasPrimasController extends Controller
             'inventario_materias_primas.id',
             'inventario_materias_primas.color',
             'inventario_materias_primas.color_codigo',
+            'inventario_materias_primas.estampado',
             'inventario_materias_primas.peso',
             'materiales_textiles.nombre as nombre_material_textil',
             'materiales_textiles.id as id_material_textil'

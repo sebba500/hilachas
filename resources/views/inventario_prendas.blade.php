@@ -185,6 +185,7 @@
                 <th>Material textil</th>
                 <th>Origen</th>
                 <th>Color</th>
+                <th>Estampado</th>
                 <th width="300px">Acciones</th>
             </tr>
         </thead>
@@ -279,7 +280,7 @@
 
                     <div class="form-group">
                         <div class="color-wheel-container">
-                            <label for="color" class="col-sm-4 control-label" style="text-align: center;">Color</label>
+                            <label for="color" class="col-sm-4 control-label" style="text-align: center; margin-bottom: -20px;"><h5>Color</h5></label>
                             <input type="hidden" name="color" id="color">
                             <input type="hidden" name="color_codigo" id="color_codigo">
 
@@ -306,24 +307,34 @@
                                     <div class="color-option" style="background-color: #A101AB;" data-value="Violeta" data-codigo="#A101AB"></div>
                                 </div>
                             </div>
+                            
 
-                            <div class="color-groups">
+                        </div>
+
+                        <div class="color-wheel-container">
+                            <label for="color" class="col-sm-4 control-label" style="text-align: center;margin-bottom: -20px;margin-top: 20px;"><h5>Estampado</h5></label>
+                            <input type="hidden" name="estampado" id="estampado">
+
+
+                
+
+                            <div class="estampado-groups">
                                 <!-- Estampados Claros -->
-                                <div class="color-group light-patterns">
+                                <div class="estampado-group light-patterns">
                                     <h5>Estampados Claros</h5>
-                                    <div class="color-option pattern-option" style="background-image: url('https://e7.pngegg.com/pngimages/157/447/png-clipart-floral-design-rubber-stamp-postage-stamps-natural-rubber-flower-flower-rubber-stamps-leaf-monochrome.png');" data-value="Floral-L" data-codigo="#d7d7d0fc"></div>
-                                    <div class="color-option pattern-option" style="background-image: url('https://i.etsystatic.com/32053703/r/il/fba2e7/3505252148/il_570xN.3505252148_1cf1.jpg');" data-value="Stripes-L" data-codigo="#d7d7d0fc"></div>
-                                    <div class="color-option pattern-option" style="background-image: url('https://t4.ftcdn.net/jpg/03/09/84/17/360_F_309841744_wYGd2DlTEnqpiEAldx0WKDKcg4GPAw5x.jpg');" data-value="Plaid-L" data-codigo="#d7d7d0fc"></div>
-                                    <div class="color-option pattern-option" style="background-image: url('https://cdn-icons-png.flaticon.com/512/6036/6036614.png');" data-value="Stamped-L" data-codigo="#d7d7d0fc"></div>
+                                    <div class="estampado-option pattern-option" style="background-image: url('https://e7.pngegg.com/pngimages/157/447/png-clipart-floral-design-rubber-stamp-postage-stamps-natural-rubber-flower-flower-rubber-stamps-leaf-monochrome.png');" data-value="Floral-C" data-codigo="#d7d7d0fc"></div>
+                                    <div class="estampado-option pattern-option" style="background-image: url('https://i.etsystatic.com/32053703/r/il/fba2e7/3505252148/il_570xN.3505252148_1cf1.jpg');" data-value="Stripes-C" data-codigo="#d7d7d0fc"></div>
+                                    <div class="estampado-option pattern-option" style="background-image: url('https://t4.ftcdn.net/jpg/03/09/84/17/360_F_309841744_wYGd2DlTEnqpiEAldx0WKDKcg4GPAw5x.jpg');" data-value="Plaid-C" data-codigo="#d7d7d0fc"></div>
+                                    <div class="estampado-option pattern-option" style="background-image: url('https://cdn-icons-png.flaticon.com/512/6036/6036614.png');" data-value="Stamped-C" data-codigo="#d7d7d0fc"></div>
                                 </div>
 
                                 <!-- Estampados Oscuros -->
-                                <div class="color-group dark-patterns">
+                                <div class="estampado-group dark-patterns">
                                     <h5>Estampados Oscuros</h5>
-                                    <div class="color-option pattern-option" style="background-image: url('https://e7.pngegg.com/pngimages/157/447/png-clipart-floral-design-rubber-stamp-postage-stamps-natural-rubber-flower-flower-rubber-stamps-leaf-monochrome.png');" data-value="Floral-D" data-codigo="#000000"></div>
-                                    <div class="color-option pattern-option" style="background-image: url('https://i.etsystatic.com/32053703/r/il/fba2e7/3505252148/il_570xN.3505252148_1cf1.jpg');" data-value="Stripes-D" data-codigo="#000000"></div>
-                                    <div class="color-option pattern-option" style="background-image: url('https://t4.ftcdn.net/jpg/03/09/84/17/360_F_309841744_wYGd2DlTEnqpiEAldx0WKDKcg4GPAw5x.jpg');" data-value="Plaid-D" data-codigo="#000000"></div>
-                                    <div class="color-option pattern-option" style="background-image: url('https://cdn-icons-png.flaticon.com/512/6036/6036614.png');" data-value="Stamped-D" data-codigo="#000000"></div>
+                                    <div class="estampado-option pattern-option" style="background-image: url('https://e7.pngegg.com/pngimages/157/447/png-clipart-floral-design-rubber-stamp-postage-stamps-natural-rubber-flower-flower-rubber-stamps-leaf-monochrome.png');" data-value="Floral-O" data-codigo="#000000"></div>
+                                    <div class="estampado-option pattern-option" style="background-image: url('https://i.etsystatic.com/32053703/r/il/fba2e7/3505252148/il_570xN.3505252148_1cf1.jpg');" data-value="Stripes-O" data-codigo="#000000"></div>
+                                    <div class="estampado-option pattern-option" style="background-image: url('https://t4.ftcdn.net/jpg/03/09/84/17/360_F_309841744_wYGd2DlTEnqpiEAldx0WKDKcg4GPAw5x.jpg');" data-value="Plaid-O" data-codigo="#000000"></div>
+                                    <div class="estampado-option pattern-option" style="background-image: url('https://cdn-icons-png.flaticon.com/512/6036/6036614.png');" data-value="Stamped-O" data-codigo="#000000"></div>
                                 </div>
                             </div>
                         </div>
@@ -389,6 +400,7 @@
                     <input type="text" hidden id="id_material_textil_procesar" name="id_material_textil_procesar">
                     <input type="text" hidden name="color_procesar" id="color_procesar">
                     <input type="text" hidden name="color_codigo_procesar" id="color_codigo_procesar">
+                    <input type="text" hidden name="estampado_procesar" id="estampado_procesar">
                     <div class="form-group">
                         <label class="col-sm-12 control-label">Instrucciones para deconstrucción</label>
                         <div class="col-sm-12">
@@ -646,6 +658,16 @@
 
         colorOptions.forEach(option => {
             option.addEventListener('click', () => {
+
+            // si esta opcion ya esta seleccionada, se deselecciona
+            if (option.classList.contains('selected')) {
+                option.classList.remove('selected');
+                colorInput.value = '';
+                colorCodigoInput.value = '';
+                return; 
+            }
+
+
                 // quita la clase selected de todos los div
                 colorOptions.forEach(opt => opt.classList.remove('selected'));
 
@@ -655,6 +677,35 @@
                 // actualiza el valor del input hidden
                 colorInput.value = option.dataset.value;
                 colorCodigoInput.value = option.dataset.codigo; // Código hexadecimal
+            });
+        });
+        /////////////////////////////////////////////////////
+
+        //funcion para seleccionar estampado
+        const estampadoOptions = document.querySelectorAll('.estampado-option');
+        const estampadoInput = document.getElementById('estampado');
+        const estampadoCodigoInput = document.getElementById('estampado_codigo');
+
+        estampadoOptions.forEach(option => {
+            option.addEventListener('click', () => {
+
+                // si esta opcion ya esta seleccionada, se deselecciona
+            if (option.classList.contains('selected')) {
+                option.classList.remove('selected');
+                estampadoInput.value = '';
+                estampadoCodigoInput.value = '';
+                return; 
+            }
+
+                // quita la clase selected de todos los div
+                estampadoOptions.forEach(opt => opt.classList.remove('selected'));
+
+                // añade la clase selected a la opcion selecionada
+                option.classList.add('selected');
+
+                // actualiza el valor del input hidden
+                estampadoInput.value = option.dataset.value;
+                estampadoCodigoInput.value = option.dataset.codigo; // Código hexadecimal
             });
         });
         /////////////////////////////////////////////////////
@@ -689,6 +740,10 @@
             {
                 data: 'color',
                 name: 'color'
+            },
+            {
+                data: 'estampado',
+                name: 'estampado'
             },
 
 
@@ -837,6 +892,7 @@
                     $('#id_prenda_procesar').val(datos.id);
                     $('#id_material_textil_procesar').val(datos.id_material_textil);
                     $('#color_procesar').val(datos.color);
+                    $('#estampado_procesar').val(datos.estampado);
                     $('#color_codigo_procesar').val(datos.color_codigo);
                     $('#instruccion').val(data.instrucciones);
 
@@ -867,6 +923,7 @@
                         id_material_textil: $('#id_material_textil_procesar').val(),
                         peso: $('#peso').val(),
                         color: $('#color_procesar').val(),
+                        estampado: $('#estampado_procesar').val(),
                         color_codigo: $('#color_codigo_procesar').val(),
                     },
 

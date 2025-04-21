@@ -8435,24 +8435,27 @@ a[data-toggle="collapse"] {
     margin: 20px auto;
 }
 
-.color-option {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 2px solid transparent;
-    position: relative;
-    transition: transform 0.2s, border 0.2s;
+
+.color-option, .estampado-option {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  background-size: cover; /* La imagen cubrirá todo el círculo */
+  background-position: center; /* Centrar la imagen */
 }
 
-.color-option:hover,
-.color-option.selected {
+.color-option:hover,.estampado-option:hover,
+.color-option.selected, .estampado-option.selected {
     transform: scale(1.2);
     border: 2px solid #000;
 }
 
 /*  tooltip */
-.color-option::after {
+.color-option::after, .estampado-option::after {
     content: attr(data-value);
     position: absolute;
     top: -30px;
@@ -8469,19 +8472,15 @@ a[data-toggle="collapse"] {
     transition: opacity 0.2s;
 }
 
-.color-option:hover::after {
+.color-option:hover::after, .estampado-option:hover::after {
     opacity: 1;
 }
 
-.color-groups {
+.color-groups, .estampado-groups {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   margin-top: 1rem;
-  flex-wrap: wrap; /* Permite ajustar a dos filas */
-}
-
-.color-group {
   border: 2px solid #ddd;
   border-radius: 8px;
   padding: 1rem;
@@ -8490,27 +8489,17 @@ a[data-toggle="collapse"] {
   min-width: 45%; /* Para asegurar que dos cuadros quepan en una fila */
 }
 
-.color-group h5 {
+
+
+.color-group h5, .estampado-group h5 {
   margin-bottom: 1rem;
   font-size: 1.2rem;
   color: #333;
 }
 
-.color-option {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: inline-block;
-  margin: 0.5rem;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  background-size: cover; /* La imagen cubrirá todo el círculo */
-  background-position: center; /* Centrar la imagen */
-}
 
-.color-option:hover {
-  transform: scale(1.2); /* Ampliar al pasar el cursor */
-}
+
+
 
 .pattern-option {
   border: 1px solid #ccc; /* Opcional: añadir un borde a los estampados */

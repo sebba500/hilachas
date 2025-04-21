@@ -39,6 +39,7 @@ class InventarioPrendasController extends Controller
                     'inventario_prendas.origen',
                     'inventario_prendas.color',
                     'inventario_prendas.color_codigo',
+                    'inventario_prendas.estampado',
                     'productos_textiles.tipo as tipo_producto_textil',
                     'productos_textiles.id as id_producto_textil',
                     'tipos_tejidos.nombre as nombre_tipo_tejido',
@@ -54,7 +55,7 @@ class InventarioPrendasController extends Controller
                 ->addColumn('action', function ($row) {
 
 
-                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-success btn-sm procesarPrenda" style="color:white; margin-right:5px; margin-top:5px;margin-bottom:5px" id="boton-editar' . $row->id . '">Procesar &nbsp;<i class="icon-wrench">&nbsp;</i></a>';
+                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Procesar" class="procesar btn btn-success btn-sm procesarPrenda" style="color:white; margin-right:5px; margin-top:5px;margin-bottom:5px" id="boton-procesar' . $row->id . '">Procesar &nbsp;<i class="icon-wrench">&nbsp;</i></a>';
                     $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deletePrenda" style="color:black; margin-right:5px; margin-top:5px;margin-bottom:5px">&nbsp;<i class="icon-trash ">&nbsp;</i></a>';
 
 
@@ -74,6 +75,12 @@ class InventarioPrendasController extends Controller
 
         try {
 
+            if (!$request->estampado) {
+                $estampado="S.E.";
+            }else{
+                $estampado=$request->estampado;
+            }
+
             $prenda = InventarioPrendas::updateOrCreate(
                 ['id' => $request->prenda_id],
                 [
@@ -83,6 +90,7 @@ class InventarioPrendasController extends Controller
                     'origen' => $request->origen,
                     'color' => $request->color,
                     'color_codigo'=>$request->color_codigo,
+                    'estampado' => $estampado,
                     'procesada' => 0
                 ]
             );
@@ -109,6 +117,7 @@ class InventarioPrendasController extends Controller
         $peso = $request->peso;
         $color = $request->color;
         $color_codigo = $request->color_codigo;
+        $estampado = $request->estampado;
 
         DB::beginTransaction();
 
@@ -117,6 +126,7 @@ class InventarioPrendasController extends Controller
             // buscar si existe la combinación de color y material textil
             $inventario = InventarioMateriasPrimas::where('id_material_textil', $id_material_textil)
                 ->where('color', $color)
+                ->where('estampado', $estampado)
                 ->first();
 
             if ($inventario) {
@@ -130,6 +140,7 @@ class InventarioPrendasController extends Controller
                     'peso' => $peso,
                     'color' => $color,
                     'color_codigo' => $color_codigo,
+                    'estampado' => $estampado,
                 ]);
             }
 

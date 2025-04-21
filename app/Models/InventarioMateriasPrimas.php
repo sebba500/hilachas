@@ -13,6 +13,7 @@ class InventarioMateriasPrimas extends Model
         'id_material_textil',
         'color',
         'color_codigo',
+        'estampado',
         'peso',
   
 

@@ -9,12 +9,13 @@ use App\Models\TipoTejido;
 use App\Models\Instruccion;
 
 use Illuminate\Http\Request;
-use DataTables;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
+use Exception;
 
 class InstruccionesController extends Controller
 {
@@ -25,7 +26,7 @@ class InstruccionesController extends Controller
         if ($request->ajax()) {
 
 
-            $data = \DB::table('instrucciones')
+            $data = DB::table('instrucciones')
                 ->leftJoin('tipos_tejidos', 'tipos_tejidos.id', '=', 'instrucciones.id_tipo_tejido')
                 ->leftJoin('materiales_textiles', 'materiales_textiles.id', '=', 'instrucciones.id_material_textil')
                 ->select(

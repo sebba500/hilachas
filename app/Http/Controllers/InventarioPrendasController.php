@@ -7,18 +7,13 @@ use Carbon\Carbon;
 use App\Models\MaterialTextil;
 use App\Models\TipoTejido;
 use App\Models\ProductoTextil;
-use App\Models\Instruccion;
 use App\Models\InventarioPrendas;
 use App\Models\InventarioMateriasPrimas;
 
 use Illuminate\Http\Request;
-use DataTables;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
-use DB;
-
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
+use Exception;
 
 class InventarioPrendasController extends Controller
 {
@@ -29,7 +24,7 @@ class InventarioPrendasController extends Controller
         if ($request->ajax()) {
 
 
-            $data = \DB::table('inventario_prendas')
+            $data = DB::table('inventario_prendas')
                 ->leftJoin('productos_textiles', 'productos_textiles.id', '=', 'inventario_prendas.id_producto_textil')
                 ->leftJoin('tipos_tejidos', 'tipos_tejidos.id', '=', 'inventario_prendas.id_tipo_tejido')
                 ->leftJoin('materiales_textiles', 'materiales_textiles.id', '=', 'inventario_prendas.id_material_textil')

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('origen', 200);
             $table->string('color', 200);
             $table->string('color_codigo', 15);
+            $table->string('estampado', 200);
             $table->tinyInteger('procesada');
             $table->timestamps();
         });

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('id_material_textil');
             $table->string('color', 200);
             $table->string('color_codigo', 15);
+            $table->string('estampado', 200);
             $table->decimal('peso', 5, 1);
             $table->timestamps();
         });

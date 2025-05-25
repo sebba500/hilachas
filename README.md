@@ -46,3 +46,7 @@ Hilachas es una aplicación web desarrollada en Laravel para la gestión de inve
 7. Ejecuta el proyecto:
     ```sh
     php artisan serve
+    
+8. Ingresa con usuario por defecto:
+  - Usuario: admin
+  - Contraseña: 12345
